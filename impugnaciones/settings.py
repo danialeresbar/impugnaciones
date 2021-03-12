@@ -154,7 +154,7 @@ JAZZMIN_SETTINGS = {
     "site_logo": "jazzmin/img/logo.png",
 
     # Welcome text on the login screen
-    "welcome_sign": "Bienvenido a nuestra plataforma de control electoral",
+    "welcome_sign": "Bienvenid@ a nuestra plataforma de control electoral",
 
     # Copyright on the footer
     "copyright": "Andres Arauz Presidente",
