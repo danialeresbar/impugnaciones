@@ -1,26 +1,28 @@
-import sys, os, django
+import os
+import sys
+import django
+
+
+sys.path.append('/src')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'impugnaciones.settings'
 django.setup()
 
-from comparacion.models import  votacion
+
+from comparacion.models import votacion
 from estructura.models import JRV
 from django.db import connection
 
-#----------------------------------------------------------------------------
-#                  CREACION DE UIDS
 
-#-----------------------------------------------------------------------------
-
-class get_Diffs:
+# ---------CREACION DE UIDS----------
+def get_diffs():
     votacionbulk = []
     cursor = connection.cursor()
 
-
-    #PRESIDENTE
+    # PRESIDENTE
     cursor.execute("update estructura_jrv set tmpdiff1=null, tmpdiff2=null")
-    uidDiff1s = votacion.objects.raw( "select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=1 and p.codpartido = 1030 group by t.cod ")
+    uidDiff1s = votacion.objects.raw("select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=1 and p.codpartido=1030 group by t.cod ")
     for uid1 in uidDiff1s:
-        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1 =uid1.min))
+        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1=uid1.min))
     JRV.objects.bulk_update(votacionbulk, ['tmpdiff1'])
     votacionbulk.clear()
     print("presidente1 validado")
@@ -38,10 +40,10 @@ class get_Diffs:
                    "update estructura_jrv set tmpdiff1=null, tmpdiff2=null;")
     print("presidente2 validado")
 
- #ASAMBLEA NACIONAL
-    uidDiff1s = votacion.objects.raw( "select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=9 and p.codpartido = 1030 group by t.cod ")
+    # ASAMBLEA NACIONAL
+    uidDiff1s = votacion.objects.raw("select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=9 and p.codpartido = 1030 group by t.cod ")
     for uid1 in uidDiff1s:
-        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1 =uid1.min))
+        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1=uid1.min))
     JRV.objects.bulk_update(votacionbulk, ['tmpdiff1'])
     votacionbulk.clear()
 
@@ -58,11 +60,11 @@ class get_Diffs:
                    "update estructura_jrv set tmpdiff1=null, tmpdiff2=null;")
     print("asamblea validado")
 
- #ASAMBLEA PROVINCIAL
+    # ASAMBLEA PROVINCIAL
     cursor.execute("update estructura_jrv set tmpdiff1=null, tmpdiff2=null")
-    uidDiff1s = votacion.objects.raw( "select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=7 and p.codpartido = 1030 group by t.cod ")
+    uidDiff1s = votacion.objects.raw("select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=7 and p.codpartido = 1030 group by t.cod ")
     for uid1 in uidDiff1s:
-        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1 =uid1.min))
+        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1=uid1.min))
     JRV.objects.bulk_update(votacionbulk, ['tmpdiff1'])
     votacionbulk.clear()
 
@@ -79,10 +81,10 @@ class get_Diffs:
                    "update estructura_jrv set tmpdiff1=null, tmpdiff2=null;")
     print("provinicial validado")
 
- #PARLAMENTO
-    uidDiff1s = votacion.objects.raw( "select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=8 and p.codpartido = 1030 group by t.cod ")
+    # PARLAMENTO
+    uidDiff1s = votacion.objects.raw("select t.cod, min(v.diff2) from estructura_jrv as t join comparacion_votacion as v on  t.cod = v.jrv_id join estructura_partido as p on v.partido_id = p.id where v.diff2 is not null and v.diff2 < 0 and v.dignidad_id=8 and p.codpartido = 1030 group by t.cod ")
     for uid1 in uidDiff1s:
-        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1 =uid1.min))
+        votacionbulk.append(JRV(cod=uid1.cod, tmpdiff1=uid1.min))
     JRV.objects.bulk_update(votacionbulk, ['tmpdiff1'])
     votacionbulk.clear()
 
@@ -98,3 +100,6 @@ class get_Diffs:
                    "update estructura_jrv set para_validar8 = True where maxdiffand is not null;"
                    "update estructura_jrv set tmpdiff1=null, tmpdiff2=null;")
     print("andino validado")
+
+
+get_diffs()

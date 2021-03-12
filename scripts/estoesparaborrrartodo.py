@@ -1,18 +1,20 @@
-import sys, os, django
+import os
+import sys
+import django
+
+
+sys.path.append('/src')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'impugnaciones.settings'
 django.setup()
 
-from comparacion.models import  votacion
-from estructura.models import JRV
+
 from django.db import connection
 
-#----------------------------------------------------------------------------
-#                  CREACION DE UIDS
-#-----------------------------------------------------------------------------
 
-class get_Diffs:
+# ----------CREACION DE UIDS----------
+def get_diffs():
     cursor = connection.cursor()
-    #PRESIDENTE
+    # PRESIDENTE
     cursor.execute("update estructura_jrv set observaciones = '';")
     cursor.execute("update estructura_jrv set incidencia = false;")
     cursor.execute("update estructura_jrv set telefonos = '';")
@@ -25,3 +27,6 @@ class get_Diffs:
     cursor.execute("update comparacion_votacion set cne1=null ")
     cursor.execute("update comparacion_votacion set acta=null, sufragantes=null, blancos=null , nulos=null")
     cursor.execute("update comparacion_votacion set diff1=null, diff2=null")
+
+
+get_diffs()
