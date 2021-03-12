@@ -16,17 +16,17 @@ class votacion(models.Model):
 
     # Fields
     cod = models.CharField(max_length=30, primary_key=True)
-    acta= models.IntegerField(null=True)
-    sufragantes= models.IntegerField(null=True)
-    blancos= models.IntegerField(null=True)
-    nulos= models.IntegerField(null=True)
+    acta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
     delegados = models.IntegerField(null=True)
     app_digitacion = models.IntegerField(null=True)
     conteo_rapido_cne = models.IntegerField(null=True)
     digitalizacion_cne = models.IntegerField(null=True)
-    cne1 = models.IntegerField( null=True )
+    cne1 = models.IntegerField(null=True)
     ocr_nuestro_actas_cne = models.IntegerField(null=True)
-    cne2 = models.IntegerField( null=True )
+    cne2 = models.IntegerField(null=True)
     cne3 = models.IntegerField(null=True)
     cne4 = models.IntegerField(null=True)
     diff1 = models.IntegerField(null=True)
@@ -35,6 +35,8 @@ class votacion(models.Model):
     diff4 = models.IntegerField(null=True)
 
     class Meta:
+        verbose_name = 'Votación'
+        verbose_name_plural = 'Votaciones'
         ordering = ["cod"]
 
     def __str__(self):
@@ -48,14 +50,14 @@ class votacion(models.Model):
 
 
 class fantasma(models.Model):
-
     # Fields
     uid = models.CharField(max_length=30)
     votos = models.IntegerField(null=True)
     origen = models.CharField(max_length=30, primary_key=True)
 
     class Meta:
-        pass
+        verbose_name = 'Fantasma'
+        verbose_name_plural = 'Fantasmas'
 
     def __str__(self):
         return str(self.pk)

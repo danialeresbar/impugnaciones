@@ -3,16 +3,17 @@ from django.urls import reverse
 
 
 class Provincia(models.Model):
-
     # Fields
     codprovincia = models.IntegerField(primary_key=True)
     nomprovincia = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Provincia'
+        verbose_name_plural = 'Provincias'
 
     def __str__(self):
-            return str(self.nomprovincia)
+        return str(self.nomprovincia)
+
     def get_absolute_url(self):
         return reverse("estructura_Provincia_detail", args=(self.pk,))
 
@@ -21,7 +22,6 @@ class Provincia(models.Model):
 
 
 class Circunscripcion(models.Model):
-
     # Relationships
     provincia = models.ForeignKey("estructura.Provincia", on_delete=models.CASCADE)
 
@@ -30,7 +30,8 @@ class Circunscripcion(models.Model):
     nomcircunscripcion = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Circunscripción'
+        verbose_name_plural = 'Circunscripciones'
 
     def __str__(self):
         return str(self.nomcircunscripcion)
@@ -42,7 +43,6 @@ class Circunscripcion(models.Model):
 
 
 class Canton(models.Model):
-
     # Relationships
     provincia = models.ForeignKey("estructura.Provincia", on_delete=models.CASCADE)
     circunscripcion = models.ForeignKey("estructura.Circunscripcion", on_delete=models.CASCADE, null=True)
@@ -52,7 +52,8 @@ class Canton(models.Model):
     nomcanton = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Cantón'
+        verbose_name_plural = 'Cantones'
 
     def __str__(self):
         return str(self.nomcanton)
@@ -70,7 +71,6 @@ class Canton(models.Model):
 
 
 class Parroquia(models.Model):
-
     # Relationships
     canton = models.ForeignKey("estructura.Canton", on_delete=models.CASCADE)
     circunscripcion = models.ForeignKey("estructura.Circunscripcion", on_delete=models.CASCADE, null=True)
@@ -80,7 +80,8 @@ class Parroquia(models.Model):
     nomparroquia = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Parroquia'
+        verbose_name_plural = 'Parroquias'
 
     def __str__(self):
         return str(self.nomparroquia)
@@ -93,7 +94,6 @@ class Parroquia(models.Model):
 
 
 class Zona(models.Model):
-
     # Relationships
     parroquia = models.ForeignKey("estructura.Parroquia", on_delete=models.CASCADE)
     circunscripcion = models.ForeignKey("estructura.Circunscripcion", on_delete=models.CASCADE, null=True)
@@ -103,7 +103,8 @@ class Zona(models.Model):
     nomzona = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Zona'
+        verbose_name_plural = 'Zonas'
 
     def __str__(self):
         return str(self.codzona)
@@ -116,7 +117,6 @@ class Zona(models.Model):
 
 
 class Recinto(models.Model):
-
     # Relationships
     parroquia = models.ForeignKey("estructura.Parroquia", on_delete=models.CASCADE)
     zona = models.ForeignKey("estructura.Zona", on_delete=models.CASCADE, null=True)
@@ -126,7 +126,8 @@ class Recinto(models.Model):
     nomrecinto = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Recinto'
+        verbose_name_plural = 'Recintos'
 
     def __str__(self):
         return str(self.nomrecinto)
@@ -151,9 +152,9 @@ class JRV(models.Model):
     # Fields
     cod = models.CharField(max_length=30, primary_key=True)
     codcne = models.IntegerField(null=True)
-    numero=models.IntegerField()
-    genero=models.CharField(max_length=1)
-    num_electores=models.IntegerField()
+    numero = models.IntegerField()
+    genero = models.CharField(max_length=1)
+    num_electores = models.IntegerField()
     quitaron = models.IntegerField(null=True)
     pusieron = models.IntegerField(null=True)
     quitaron7 = models.IntegerField(null=True)
@@ -174,21 +175,21 @@ class JRV(models.Model):
     tmpdiff1 = models.IntegerField(null=True)
     tmpdiff2 = models.IntegerField(null=True)
     maxdiff = models.IntegerField(null=True)
-    maxdiffnal= models.IntegerField(null=True)
-    maxdiffprov= models.IntegerField(null=True)
-    maxdiffand= models.IntegerField(null=True)
+    maxdiffnal = models.IntegerField(null=True)
+    maxdiffprov = models.IntegerField(null=True)
+    maxdiffand = models.IntegerField(null=True)
     para_validar = models.BooleanField(default=False)
     para_validar7 = models.BooleanField(default=False)
     para_validar8 = models.BooleanField(default=False)
     para_validar9 = models.BooleanField(default=False)
-    difnum1= models.BooleanField(default=False)
-    difnum7= models.BooleanField(default=False)
-    difnum8= models.BooleanField(default=False)
+    difnum1 = models.BooleanField(default=False)
+    difnum7 = models.BooleanField(default=False)
+    difnum8 = models.BooleanField(default=False)
     difnum9 = models.BooleanField(default=False)
-    otro1 = models.CharField(max_length=30,null=True)
-    otro7 = models.CharField(max_length=30,null=True)
-    otro8 = models.CharField(max_length=30,null=True)
-    otro9 = models.CharField(max_length=30,null=True)
+    otro1 = models.CharField(max_length=30, null=True)
+    otro7 = models.CharField(max_length=30, null=True)
+    otro8 = models.CharField(max_length=30, null=True)
+    otro9 = models.CharField(max_length=30, null=True)
     no_procede = models.BooleanField(default=False)
     para_reclamar = models.BooleanField(default=False)
     no_procede7 = models.BooleanField(default=False)
@@ -197,10 +198,10 @@ class JRV(models.Model):
     para_reclamar8 = models.BooleanField(default=False)
     no_procede9 = models.BooleanField(default=False)
     para_reclamar9 = models.BooleanField(default=False)
-    incidencia= models.BooleanField(default=False)
-    fecha_incidencia=models.DateTimeField(null=True)
+    incidencia = models.BooleanField(default=False)
+    fecha_incidencia = models.DateTimeField(null=True)
     incidencia_grave = models.BooleanField(default=False)
-    incidencia_resuelta= models.BooleanField(null=True)
+    incidencia_resuelta = models.BooleanField(null=True)
     observaciones = models.TextField()
     telefonos = models.TextField()
     acta_delegados = models.CharField(max_length=255, null=True)
@@ -229,13 +230,14 @@ class JRV(models.Model):
     acta_copiaand3 = models.CharField(max_length=255, null=True)
     acta_cne = models.CharField(max_length=255, null=True)
     acta_cnerecuento = models.CharField(max_length=255, null=True)
-    noactapre=models.IntegerField(null=True)
-    noactanal=models.IntegerField(null=True)
-    noactapro=models.IntegerField(null=True)
-    noactaand=models.IntegerField(null=True)
+    noactapre = models.IntegerField(null=True)
+    noactanal = models.IntegerField(null=True)
+    noactapro = models.IntegerField(null=True)
+    noactaand = models.IntegerField(null=True)
 
     class Meta:
-        pass
+        verbose_name = 'JRV'
+        verbose_name_plural = 'JRVs'
 
     def __str__(self):
         return str(self.pk)
@@ -248,13 +250,13 @@ class JRV(models.Model):
 
 
 class dignidad(models.Model):
-
     # Fields
     coddignidad = models.IntegerField(primary_key=True)
     nomdignidad = models.CharField(max_length=255)
 
     class Meta:
-        pass
+        verbose_name = 'Dignidad'
+        verbose_name_plural = 'Dignidades'
 
     def __str__(self):
         return str(self.nomdignidad)
@@ -267,7 +269,6 @@ class dignidad(models.Model):
 
 
 class partido(models.Model):
-
     # Fields
     codpartido = models.IntegerField()
     nompartido = models.CharField(max_length=255)
@@ -276,7 +277,8 @@ class partido(models.Model):
     dignidad = models.ForeignKey("estructura.dignidad", on_delete=models.CASCADE)
 
     class Meta:
-        pass
+        verbose_name = 'Partido'
+        verbose_name_plural = 'Partidos'
 
     def __str__(self):
         return str(self.nompartido)
