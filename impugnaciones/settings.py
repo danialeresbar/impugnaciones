@@ -20,7 +20,7 @@ SECRET_KEY = '^l)7d*%h&db4uft@dk%h-w&nup#pu%)a!d)c7jwgoixo5_hm0$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['181.39.38.34','78.47.195.159','impugnaciones.andresarauz.ec','127.0.0.1','192.168.100.15']
+ALLOWED_HOSTS = ['181.39.38.34','78.47.195.159','impugnaciones.andresarauz.ec','127.0.0.1','192.168.100.15', 'localhost']
 
 # Application definition
 INSTALLED_APPS = [
