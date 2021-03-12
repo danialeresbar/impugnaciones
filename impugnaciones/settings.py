@@ -91,7 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'impugnaciones',
-        'USER': 'simon',
+        'USER': 'djangouser',
         'PASSWORD': 'postgres',
         'HOST': 'db',
         'PORT': 5432,
