@@ -21,4 +21,4 @@ services:
     image: postgres:12
     container_name: impugnaciones-postgres
     environment: 
-      POSTGRES_PASSWORD: ".6"BdX,$vj-X5V6
+      POSTGRES_PASSWORD: postgres
