@@ -1,56 +1,59 @@
 # IMPUGNACIONES
 
-## Documentation ##
+## Documentación
 
-Plataforma para la Gestión de Incidencias e Impugnaciones
+Plataforma para la gestión de Incidencias e Impugnaciones
 
-### How to run the project ###
+### Correr el proyecto
 
-The project use docker, so just run:
+Este proyecta usa Docker, por lo que solo deberás correr el comando:
 
 ```
 docker-compose up
 ```
 
-> If it's first time, the images will be created. Sometimes the project doesn't run at first time because
-> the init of postgres, just run again `docker-compose up` and it will work.
+*La aplicación IMPUGNACIONES correrá en la URL `localhost:8008`*
 
-### When there are changes in the database container ###
+Para recrear los contenedores si las dependencias del proyecto son actualizadas ejecuta el comando:
 
-It may be useful to run:
+```
+docker-compose up --build
+```
+
+Para remover los contenedores de Docker incluyendo la base de datos (Útil algunas veces cuando tratamos con migraciones):
 
 ```
 docker-compose down --volumes
 ```
- 
-And again run:
 
-```
-docker-compose up --build
-```
+### Accediendo al panel de administración
 
+El sitio de administración de Django para la aplicación IMPUGNACIONES puede ser accedido en `localhost:8000/admin`
 
-*IMPUGNACIONES app will run in url `localhost:8008`*
-
-To recreate the docker images after dependencies changes run:
-
-```
-docker-compose up --build
-```
-
-To remove the docker containers including database (Useful sometimes when dealing with migrations):
-
-```
-docker-compose down
-```
-
-### Accessing Administration
-
-The django admin site of the IMPUGNACIONES project can be accessed at `localhost:8000/admin`
-
-By default the development configuration creates a superuser with the following credentials:
+Por defecto la configuración de desarrollo crea un super usuario con las siguientes credenciales:
 
 ```
 Username: admin
 Password: admin
+```
+
+### Carga de datos básicos
+
+Para cargar la información básica en la base de datos primero debes tener una copia de los archivos CSV.
+Estos archivos los puedes encontrar en: *enlance*. Una vez que hayas descargado los archivos debes colocarlos
+en la carpeta **scripts** de este proyecto. En esta carpeta se encuentran los scripts que cargarán la información
+contenida en los archivos que descargaste. Para proceder a cargar la información debes entrar en el contenedor
+de la aplicación:
+
+```
+docker exec -it impugnaciones bash
+```
+
+Una vez que estás en la terminal del contenedor deberás ejecutar los scripts en el siguiente orden:
+
+```
+1. python scripts/start.py
+2. python scripts/startvotos.py
+3. python scripts/startjsonincidencias.py
+4. python scripts/startjsonvotos.py
 ```
