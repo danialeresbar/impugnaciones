@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
-from tmp import views
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,10 +26,11 @@ urlpatterns = [
     path('comparacion/', include('comparacion.urls')),
     path('tmp/', include('tmp.urls')),
     path('admin/', admin.site.urls),
-    path("select2/", include("django_select2.urls")),
-    path("", include("autenticacion.urls")),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    path('select2/', include("django_select2.urls")),
+    path('', include("autenticacion.urls")),
+    path('logout/', LogoutView.as_view(), name="logout"),
 ]
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

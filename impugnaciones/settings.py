@@ -20,7 +20,14 @@ SECRET_KEY = '^l)7d*%h&db4uft@dk%h-w&nup#pu%)a!d)c7jwgoixo5_hm0$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['181.39.38.34','78.47.195.159','impugnaciones.andresarauz.ec','127.0.0.1','192.168.100.15', 'localhost']
+ALLOWED_HOSTS = [
+    '181.39.38.34',
+    '78.47.195.159',
+    'impugnaciones.andresarauz.ec',
+    '127.0.0.1',
+    'localhost',
+    '192.168.100.15',
+]
 
 # Application definition
 INSTALLED_APPS = [
@@ -179,10 +186,10 @@ JAZZMIN_SETTINGS = {
         {"name": "Web", "url": "https://andresarauz.ec", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
-     #   {"model": "auth.User"},
+        # {"model": "auth.User"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "comparacion"},{"app": "estructura"},
+        {"app": "comparacion"}, {"app": "estructura"},
     ],
 
     #############
@@ -252,7 +259,10 @@ JAZZMIN_SETTINGS = {
     # - carousel
     "changeform_format": "carousel",
     # override change forms on a per modeladmin basis
-    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs",},
+    "changeform_format_overrides": {
+        "auth.user": "collapsible",
+        "auth.group": "vertical_tabs"
+    },
     # Add a language dropdown into the admin
     "language_chooser": False,
 }

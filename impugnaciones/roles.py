@@ -6,65 +6,78 @@ class Abogado_Nacional(AbstractUserRole):
         'editar_Todo': True,
     }
 
+
 class Abogado_Azuay(AbstractUserRole):
     available_permissions = {
         'editar_Azuay': True,
     }
+
 
 class Abogado_Bolivar(AbstractUserRole):
     available_permissions = {
         'editar_Bolivar': True,
     }
 
+
 class Abogado_Canar(AbstractUserRole):
     available_permissions = {
         'editar_Canar': True,
     }
+
 
 class Abogado_Carchi(AbstractUserRole):
     available_permissions = {
         'editar_Carchi': True,
     }
 
+
 class Abogado_Cotopaxi(AbstractUserRole):
     available_permissions = {
         'editar_Cotopaxi': True,
     }
+
 
 class Abogado_Chimborazo(AbstractUserRole):
     available_permissions = {
         'editar_Chimborazo': True,
     }
 
+
 class Abogado_ElOro(AbstractUserRole):
     available_permissions = {
         'editar_ElOro': True,
     }
+
 
 class Abogado_Esmeraldas(AbstractUserRole):
     available_permissions = {
         'editar_Esmeraldas': True,
     }
 
+
 class Abogado_Guayas(AbstractUserRole):
     available_permissions = {
         'editar_Guayas': True,
     }
+
 
 class Abogado_Imbabura(AbstractUserRole):
     available_permissions = {
         'editar_Imbabura': True,
     }
 
+
 class Abogado_Loja(AbstractUserRole):
     available_permissions = {
         'editar_Loja': True,
     }
 
+
 class Abogado_LosRios(AbstractUserRole):
     available_permissions = {
         'editar_LosRios': True,
     }
+
 
 class Abogado_Manabi(AbstractUserRole):
     available_permissions = {
