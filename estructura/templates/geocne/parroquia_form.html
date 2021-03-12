@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Parroquia_list' %}">
+    Parroquia Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_PARROQUIA">COD_PARROQUIA: </label>
+  <input class="form-control col-sm-10" id="COD_PARROQUIA" type="number" name="COD_PARROQUIA" value="{{ object.COD_PARROQUIA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NOM_PARROQUIA">NOM_PARROQUIA: </label>
+  <input class="form-control col-sm-10" id="NOM_PARROQUIA" type="text" name="NOM_PARROQUIA" value="{{ object.NOM_PARROQUIA }}">
+  </div>
+  <div class="form-group row">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'tmp_mmv_list' %}">
+    mmv Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_PARTIDO">COD_PARTIDO: </label>
+  <input class="form-control col-sm-10" id="COD_PARTIDO" type="number" name="COD_PARTIDO" value="{{ object.COD_PARTIDO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="TOTAL_VOTOS_M">TOTAL_VOTOS_M: </label>
+  <input class="form-control col-sm-10" id="TOTAL_VOTOS_M" type="text" name="TOTAL_VOTOS_M" value="{{ object.TOTAL_VOTOS_M }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="TOTAL_VOTOS_F">TOTAL_VOTOS_F: </label>
+  <input class="form-control col-sm-10" id="TOTAL_VOTOS_F" type="text" name="TOTAL_VOTOS_F" value="{{ object.TOTAL_VOTOS_F }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="ORD_PARTIDO">ORD_PARTIDO: </label>
+  <input class="form-control col-sm-10" id="ORD_PARTIDO" type="number" name="ORD_PARTIDO" value="{{ object.ORD_PARTIDO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_DIGNIDAD">COD_DIGNIDAD: </label>
+  <input class="form-control col-sm-10" id="COD_DIGNIDAD" type="number" name="COD_DIGNIDAD" value="{{ object.COD_DIGNIDAD }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_CANDIDATO">COD_CANDIDATO: </label>
+  <input class="form-control col-sm-10" id="COD_CANDIDATO" type="number" name="COD_CANDIDATO" value="{{ object.COD_CANDIDATO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_CIRCUNSCRIPCION">COD_CIRCUNSCRIPCION: </label>
+  <input class="form-control col-sm-10" id="COD_CIRCUNSCRIPCION" type="number" name="COD_CIRCUNSCRIPCION" value="{{ object.COD_CIRCUNSCRIPCION }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="ORD_CANDIDATO">ORD_CANDIDATO: </label>
+  <input class="form-control col-sm-10" id="ORD_CANDIDATO" type="number" name="ORD_CANDIDATO" value="{{ object.ORD_CANDIDATO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NUM_JUNTA">NUM_JUNTA: </label>
+  <input class="form-control col-sm-10" id="NUM_JUNTA" type="number" name="NUM_JUNTA" value="{{ object.NUM_JUNTA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_PARROQUIA">COD_PARROQUIA: </label>
+  <input class="form-control col-sm-10" id="COD_PARROQUIA" type="number" name="COD_PARROQUIA" value="{{ object.COD_PARROQUIA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="VOTOS_M">VOTOS_M: </label>
+  <input class="form-control col-sm-10" id="VOTOS_M" type="number" name="VOTOS_M" value="{{ object.VOTOS_M }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NOM_PARTIDO">NOM_PARTIDO: </label>
+  <input class="form-control col-sm-10" id="NOM_PARTIDO" type="text" name="NOM_PARTIDO" value="{{ object.NOM_PARTIDO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="SEX_JUNTA">SEX_JUNTA: </label>
+  <input class="form-control col-sm-10" id="SEX_JUNTA" type="text" name="SEX_JUNTA" value="{{ object.SEX_JUNTA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="VOTOS">VOTOS: </label>
+  <input class="form-control col-sm-10" id="VOTOS" type="number" name="VOTOS" value="{{ object.VOTOS }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="TOTAL_VOTOS">TOTAL_VOTOS: </label>
+  <input class="form-control col-sm-10" id="TOTAL_VOTOS" type="number" name="TOTAL_VOTOS" value="{{ object.TOTAL_VOTOS }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_ZONA">COD_ZONA: </label>
+  <input class="form-control col-sm-10" id="COD_ZONA" type="number" name="COD_ZONA" value="{{ object.COD_ZONA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="TOTAL_VOTOS_POR">TOTAL_VOTOS_POR: </label>
+  <input class="form-control col-sm-10" id="TOTAL_VOTOS_POR" type="number" name="TOTAL_VOTOS_POR" value="{{ object.TOTAL_VOTOS_POR }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="VOTOS_F">VOTOS_F: </label>
+  <input class="form-control col-sm-10" id="VOTOS_F" type="number" name="VOTOS_F" value="{{ object.VOTOS_F }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="LIS_PARTIDO">LIS_PARTIDO: </label>
+  <input class="form-control col-sm-10" id="LIS_PARTIDO" type="text" name="LIS_PARTIDO" value="{{ object.LIS_PARTIDO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_PROVINCIA">COD_PROVINCIA: </label>
+  <input class="form-control col-sm-10" id="COD_PROVINCIA" type="number" name="COD_PROVINCIA" value="{{ object.COD_PROVINCIA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_CANTON">COD_CANTON: </label>
+  <input class="form-control col-sm-10" id="COD_CANTON" type="number" name="COD_CANTON" value="{{ object.COD_CANTON }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NOM_CANDIDATO">NOM_CANDIDATO: </label>
+  <input class="form-control col-sm-10" id="NOM_CANDIDATO" type="text" name="NOM_CANDIDATO" value="{{ object.NOM_CANDIDATO }}">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

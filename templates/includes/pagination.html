@@ -1,0 +1,80 @@
+{% if is_paginated %}
+<head>
+<style>
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #049AF5;
+  color: white;
+  border: 1px solid #049AF5;
+}
+
+.pagination a:hover:not(.active) {background-color: #049AF5;}
+</style>
+</head>
+
+
+{% load i18n %}
+
+
+        <div class="pagination justify-content-center" style="margin:20px 0">
+            {% block previouslink %}
+                {% if page_obj.has_previous %}
+                    {% if disable_link_for_first_page and page_obj.previous_page_number == 1 %}
+                        <a href="{{ request.path }}{% if getvars %}?{{ getvars|slice:"1:" }}{% endif %}" class="prev">{{ previous_link_decorator|safe }}{% trans "previous" %}</a>
+                    {% else %}
+                        <a href="?page{{ page_suffix }}={{ page_obj.previous_page_number }}{{ getvars }}" class="prev">{{ previous_link_decorator|safe }}{% trans "previous" %}</a>
+                    {% endif %}
+                {% else %}
+                    {% if display_disabled_previous_link %}
+                        <span class="disabled prev">{{ previous_link_decorator|safe }}{% trans "previous" %}</span>
+                    {% endif %}
+                {% endif %}
+            {% endblock previouslink %}
+            {% block pagelinks %}
+                {% if display_page_links %}
+                    {% for page in pages %}
+                        {% if page %}
+                            {% ifequal page page_obj.number %}
+                                <a href="?page{{ page_suffix }}={{ page }}{{ getvars }}" class="page active">{{ page }}</a>
+                            {% else %}
+                                {% if disable_link_for_first_page and page == 1 %}
+                                    <a href="{{ request.path }}{% if getvars %}?{{ getvars|slice:"1:" }}{% endif %}" class="page">{{ page }}</a>
+                                {% else %}
+                                    <a href="?page{{ page_suffix }}={{ page }}{{ getvars }}" class="page">{{ page }}</a>
+                                {% endif %}
+                            {% endifequal %}
+                        {% else %}
+
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endblock pagelinks %}
+            {% block nextlink %}
+                {% if page_obj.has_next %}
+                    <a href="?page{{ page_suffix }}={{ page_obj.next_page_number }}{{ getvars }}" class="next">{% trans "next" %}{{ next_link_decorator|safe }}</a>
+                {% else %}
+                    {% if display_disabled_next_link %}
+                        <span class="disabled next">{% trans "next" %}{{ next_link_decorator|safe }}</span>
+                    {% endif %}
+                {% endif %}
+            {% endblock nextlink %}
+        </div>
+
+{% endif %}

@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Provincia_list' %}">
+    Provincia Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_PROVINCIA">COD_PROVINCIA: </label>
+  <input class="form-control col-sm-10" id="COD_PROVINCIA" type="number" name="COD_PROVINCIA" value="{{ object.COD_PROVINCIA }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NOM_PROVINCIA">NOM_PROVINCIA: </label>
+  <input class="form-control col-sm-10" id="NOM_PROVINCIA" type="text" name="NOM_PROVINCIA" value="{{ object.NOM_PROVINCIA }}">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

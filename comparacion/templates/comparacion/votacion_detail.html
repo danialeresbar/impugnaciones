@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'comparacion_votacion_list' %}">
+    votacion Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>digitacion_nuestra</td><td>{{ object.digitacion_nuestra }}</td></tr>
+    <tr><td>CNE</td><td>{{ object.cne1 }}</td></tr>
+    <tr><td>escrutinio2</td><td>{{ object.cne2 }}</td></tr>
+    <tr><td>preconteo</td><td>{{ object.conteo_rapido_cne }}</td></tr>
+    <tr><td>delegados</td><td>{{ object.delegados }}</td></tr>
+    <tr><td>link_acta_app</td><td>{{ object.link_acta_app }}</td></tr>
+    <tr><td>link_acta_cne</td><td>{{ object.link_acta_cne }}</td></tr>
+    <tr><td>escrutinio4</td><td>{{ object.cne4 }}</td></tr>
+    <tr><td>digitacion_cne</td><td>{{ object.digitalizacion_cne }}</td></tr>
+    <tr><td>escrutinio3</td><td>{{ object.cne3 }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Provincia_list' %}">
+    Provincia Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>COD_PROVINCIA</td><td>{{ object.COD_PROVINCIA }}</td></tr>
+    <tr><td>NOM_PROVINCIA</td><td>{{ object.NOM_PROVINCIA }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

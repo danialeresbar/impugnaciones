@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'tmp_mmv_list' %}">
+    mmv Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>COD_PARTIDO</td><td>{{ object.COD_PARTIDO }}</td></tr>
+    <tr><td>TOTAL_VOTOS_M</td><td>{{ object.TOTAL_VOTOS_M }}</td></tr>
+    <tr><td>TOTAL_VOTOS_F</td><td>{{ object.TOTAL_VOTOS_F }}</td></tr>
+    <tr><td>ORD_PARTIDO</td><td>{{ object.ORD_PARTIDO }}</td></tr>
+    <tr><td>COD_DIGNIDAD</td><td>{{ object.COD_DIGNIDAD }}</td></tr>
+    <tr><td>COD_CANDIDATO</td><td>{{ object.COD_CANDIDATO }}</td></tr>
+    <tr><td>COD_CIRCUNSCRIPCION</td><td>{{ object.COD_CIRCUNSCRIPCION }}</td></tr>
+    <tr><td>ORD_CANDIDATO</td><td>{{ object.ORD_CANDIDATO }}</td></tr>
+    <tr><td>NUM_JUNTA</td><td>{{ object.NUM_JUNTA }}</td></tr>
+    <tr><td>COD_PARROQUIA</td><td>{{ object.COD_PARROQUIA }}</td></tr>
+    <tr><td>VOTOS_M</td><td>{{ object.VOTOS_M }}</td></tr>
+    <tr><td>NOM_PARTIDO</td><td>{{ object.NOM_PARTIDO }}</td></tr>
+    <tr><td>SEX_JUNTA</td><td>{{ object.SEX_JUNTA }}</td></tr>
+    <tr><td>VOTOS</td><td>{{ object.VOTOS }}</td></tr>
+    <tr><td>TOTAL_VOTOS</td><td>{{ object.TOTAL_VOTOS }}</td></tr>
+    <tr><td>COD_ZONA</td><td>{{ object.COD_ZONA }}</td></tr>
+    <tr><td>TOTAL_VOTOS_POR</td><td>{{ object.TOTAL_VOTOS_POR }}</td></tr>
+    <tr><td>VOTOS_F</td><td>{{ object.VOTOS_F }}</td></tr>
+    <tr><td>LIS_PARTIDO</td><td>{{ object.LIS_PARTIDO }}</td></tr>
+    <tr><td>COD_PROVINCIA</td><td>{{ object.COD_PROVINCIA }}</td></tr>
+    <tr><td>COD_CANTON</td><td>{{ object.COD_CANTON }}</td></tr>
+    <tr><td>NOM_CANDIDATO</td><td>{{ object.NOM_CANDIDATO }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

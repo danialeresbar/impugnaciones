@@ -1,0 +1,34 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Recinto_list' %}">
+    Recinto Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="COD_RECINTO">COD_RECINTO: </label>
+  <input class="form-control col-sm-10" id="COD_RECINTO" type="number" name="COD_RECINTO" value="{{ object.COD_RECINTO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="NOM_RECINTO">NOM_RECINTO: </label>
+  <input class="form-control col-sm-10" id="NOM_RECINTO" type="text" name="NOM_RECINTO" value="{{ object.NOM_RECINTO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="DIR_RECINTO">DIR_RECINTO: </label>
+  <input class="form-control col-sm-10" id="DIR_RECINTO" type="text" name="DIR_RECINTO" value="{{ object.DIR_RECINTO }}">
+  </div>
+  <div class="form-group row">
+  <label class="col-sm-2 col-form-label" for="TEL_RECINTO">TEL_RECINTO: </label>
+  <input class="form-control col-sm-10" id="TEL_RECINTO" type="number" name="TEL_RECINTO" value="{{ object.TEL_RECINTO }}">
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Recinto_list' %}">
+    Recinto Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>COD_RECINTO</td><td>{{ object.COD_RECINTO }}</td></tr>
+    <tr><td>NOM_RECINTO</td><td>{{ object.NOM_RECINTO }}</td></tr>
+    <tr><td>DIR_RECINTO</td><td>{{ object.DIR_RECINTO }}</td></tr>
+    <tr><td>TEL_RECINTO</td><td>{{ object.TEL_RECINTO }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

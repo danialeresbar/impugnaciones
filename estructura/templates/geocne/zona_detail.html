@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'estructura_Zona_list' %}">
+    Zona Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>NOM_ZONA</td><td>{{ object.NOM_ZONA }}</td></tr>
+    <tr><td>COD_ZONA</td><td>{{ object.COD_ZONA }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

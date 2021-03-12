@@ -1,0 +1,295 @@
+{% extends 'layouts/base2.html' %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block title %} Validacion de JRV- Presidencia y Vicepresidencia{% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+<div class="modal-content" id="filetypeModal">
+
+    <div class="modal-header">
+        <h3 class="modal-title">Detalles de JRV</h3>
+        <button type="button" id="closeModal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    {% block content %}
+        <div class="modal-body">
+
+            <!DOCTYPE html>
+            <html lang="es">
+            <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Detalle JRV</title>
+                <!-- Bootstrap -->
+            </head>
+            <body>
+
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table class="table table-striped" width="100%" >
+                                <tbody>
+                                <tr>
+                                    <td><H5>Provincia</H5></td>
+                                    <td>{{jrvactual.provincia}}</td>
+                                    <td><H5>Canton</H5></td>
+                                    <td>{{jrvactual.canton}} &nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Parroquia</h5></td>
+                                    <td>{{jrvactual.parroquia}}</td>
+                                    <td><h5>Zona</h5></td>
+                                    <td>{{jrvactual.zona}}</td>
+                                </tr>
+                                <tr>
+                                    <td><h5>Recinto</h5></td>
+                                    <td>{{jrvactual.recinto}} </td>
+                                    <td><h5>Jrv</h5></td>
+                                    <td>{{jrvactual.numero}}{{jrvactual.genero}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <hr>
+
+<script>
+     function zoomin2(){
+        var myImg = document.getElementById("map2");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 2500) return false;
+         else{
+            myImg.style.width = (currWidth + 100) + "px";
+        }
+    }
+    function zoomout2(){
+        var myImg = document.getElementById("map2");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 100) return false;
+		 else{
+            myImg.style.width = (currWidth - 100) + "px";
+        }
+    }
+
+    function zoomin(){
+        var myImg = document.getElementById("map");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 2500) return false;
+         else{
+            myImg.style.width = (currWidth + 100) + "px";
+        }
+    }
+    function zoomout(){
+        var myImg = document.getElementById("map");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 100) return false;
+		 else{
+            myImg.style.width = (currWidth - 100) + "px";
+        }
+    }
+     function zoomin1(){
+        var myImg = document.getElementById("map1");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 2500) return false;
+         else{
+            myImg.style.width = (currWidth + 100) + "px";
+        }
+    }
+    function zoomout1(){
+        var myImg = document.getElementById("map1");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 100) return false;
+		 else{
+            myImg.style.width = (currWidth - 100) + "px";
+        }
+    }
+
+</script>
+
+
+<style>
+    *body {
+  margin: 0;
+}
+#navbar {
+	background-color: #000;
+    padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 20px;
+}
+
+</style>
+
+
+                    <div class="row" style="background-color: #d8f0f9">
+                        <p></p>
+
+                        <div class="col-md-6 col-12 text-center">
+
+                            <div class="row">
+
+                                <div class="column " style="overflow:scroll; height:800px;">
+                                    <div id="navbar">
+                                        <button type="button" onclick="zoomout()"> -  </button>
+                                        <button type="button" onclick="zoomin()"> + </button>
+                                    </div>
+                                    <img  id="map" src="{{ jrvactual.acta_delegados}}">
+                                    <div id="navbar">
+                                        <button type="button" onclick="zoomout1()"> -  </button>
+                                        <button type="button" onclick="zoomin1()"> + </button>
+                                    </div>
+                                    <img id="map1" src="{{ jrvactual.acta_delegados2}}">
+                                    <div id="navbar">
+                                        <button type="button" onclick="zoomout2()"> -  </button>
+                                        <button type="button" onclick="zoomin2()"> + </button>
+                                    </div>
+                                    <img id="map2" src="{{ jrvactual.acta_delegados3}}">
+                                </div>
+                            </div>
+                            <p></p>
+                            <h4>Acta Delegados</h4>
+                        </div>
+                        <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
+                            <div class='embed-responsive' style='padding-bottom:150%'>
+                                <object data= {{imagencne}} type='application/pdf' width='100%' height='100%'></object>
+                            </div>
+                            <p></p>
+                            <h4>Acta Digitacion</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+
+            </body>
+            </html>
+
+            <table id="votacion-table" class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="text-center" scope="col">Lista/Candidato</th>
+                    <th class="text-center" scope="col">Delegados</th>
+                    <th class="text-center" scope="col">Digitacion</th>
+                    <th class="text-center" scope="col">Conteo Rapido CNE</th>
+                    <th class="text-center" scope="col">Escrutinio CNE</th>
+                    <th class="text-center" scope="col">Digitalizacion CNE</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for votacion in votacion_list %}
+                    <tr>
+                        <th class="text-center" scope="row">{{ votacion.partido }}</th>
+                        <td class="text-center">{{ votacion.delegados }}</td>
+                        <td class="text-center">{{ votacion.app_digitacion }}</td>
+                        <td class="text-center">{{ votacion.conteo_rapido_cne }}</td>
+                        <td class="text-center">{{ votacion.cne1 }}</td>
+                        <td class="text-center">{{ votacion.digitalizacion_cne }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+
+            <section>
+
+                <style>
+                    .vertical-center {
+                        margin: 0;
+                        position: absolute;
+                        top: 50%;
+                        -ms-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                    }
+                </style>
+
+                <hr>
+
+
+                <form id="getAPI" method="post">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Observaciones">Observaciones</label>
+                                        <textarea class="form-control" rows="7" cols="40" name="Observaciones" >{{jrvactual.observaciones}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <center>Reclamaciones</center>
+                                        <div class="container vertical-center">
+
+                                            <center><label>
+                                                <input type="radio" class="checkbox form-control" name="reclamar" value="para_reclamar" {% if reclamar == "si" %}checked="True"{% endif %} />Para Reclamar</label></center>
+
+                                            <center><label>
+                                                <input type="radio" class="checkbox form-control" name="reclamar" value="No_procede" {% if reclamar == "no" %}checked="True"{% endif %} />No procede Reclamo</label></center>
+                                         <center><label>
+                                        <input type="text" class=" form-control" name="otroreclamo" />Otro Tipo de Reclamo </label></center>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <input id="jrvactual" name="jrvactual" type="hidden" value={{jrvactual.pk}}>
+                                <div class="col-md-2">
+                                    <center><label>
+                                        <input type="number" class=" form-control" name="quitaron" />Votos que nos quitaron lista 1-5 </label></center>
+                                    <center><label>
+                                        <input type="number" class=" form-control" name="pusieron" />Votos que pusieron a otro candidato </label></center>
+
+
+
+                                    <input type="submit" class="btn btn-primary" name="filtrar"  value="Guardar cambios">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+                <script>
+                    $("#getAPI").submit(function(event) {
+                        event.preventDefault();
+                        event.preventDefault();
+                        event.preventDefault();
+                    });
+                    $.ajax({
+                        url: '/comparacion/updated/',  // your url endpoint
+                        type: 'POST',
+
+                        data: $('#getAPI').serialize(),  // gather form data
+                        success: function(data) {
+                            console.log(data);
+                            $("#filetypeModal").modal("toggle");  // Use toggle to close modal
+                        }
+                        // end success callback
+                    });
+                    $("#closeModal").click(event =>{
+                        alert('Success');// end ajax call
+                        // prevent default submission
+                        event.preventDefault();
+                    });
+                </script>
+
+            </section>
+
+
+
+        </div>
+        </div>
+    {% endblock content %}
