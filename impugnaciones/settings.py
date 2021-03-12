@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'impugnaciones',
         'USER': 'simon',
         'PASSWORD': '".6"BdX,$vj-X5V6',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': 5432,
     }
 }

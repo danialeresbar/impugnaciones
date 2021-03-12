@@ -15,10 +15,10 @@ services:
     # Dev user: admin pass: admin
     command: ["/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
     ports:
-      - "8000:8000"
+      - "8008:8000"
 
   db:
     image: postgres:12
     container_name: impugnaciones-postgres
     environment: 
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ".6"BdX,$vj-X5V6
