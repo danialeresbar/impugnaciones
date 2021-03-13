@@ -1,8 +1,9 @@
-from django.core.management.base import BaseCommand, CommandError
+import requests
+
+from django.core.management.base import BaseCommand
+from django.db import connection
 from tmp.models import escrutinio1
 from comparacion.models import votacion
-from django.db import connection
-import requests
 
 
 class Command(BaseCommand):
@@ -15,11 +16,10 @@ class Command(BaseCommand):
         response7 = requests.get("https://impugnaciones.andresarauz.ec/resultados/resultados_7.csv").text.split("\n")
         response8 = requests.get("https://impugnaciones.andresarauz.ec/resultados/resultados_8.csv").text.split("\n")
         response9 = requests.get("https://impugnaciones.andresarauz.ec/resultados/resultados_9.csv").text.split("\n")
-        lines=response1+response7+response8+response9
+        lines = response1 + response7 + response8 + response9
 
         for line in lines:
             columna = line.split('|')
-
             try:
                 uidcod = "{:02d}".format(int(columna[1])) + "{:03d}".format(int(columna[2])) + \
                          "{:04d}".format(int(columna[4])) + "{:02d}".format(int(columna[5])) + \
@@ -28,8 +28,8 @@ class Command(BaseCommand):
                 newline = uidcod + "," + columna[8] + "," + columna[11] + "," + columna[12] + "," + columna[13] + "," + \
                           columna[14]+"\n"
                 newfile.write(newline)
-            except:
-                print(line)
+            except Exception as e:
+                print(f'Error: \n{e}')
 
         newfile.close()
         print("base de datos convertida a formato MMV")
@@ -38,7 +38,7 @@ class Command(BaseCommand):
         cursor = connection.cursor()
         cursor.execute("TRUNCATE tmp_escrutinio1")
         insert_count = escrutinio1.objects.from_csv('basicos/2uploadpres.csv', delimiter=",")
-        print("{} records cargados en la BD temporal".format(insert_count))
+        print(f'{insert_count} registros cargados en la BD temporal')
         # Cargar datos de bd temporal a columna correspondiente
         cursor.execute("UPDATE comparacion_votacion v SET cne1 = e.votos, acta = e.cod_junta, sufragantes=e.sufragantes, nulos=e.nulos, blancos=e.blancos   FROM tmp_escrutinio1 e WHERE v.cod = e.uid")
         print("Columna de escrutinio actualizada")

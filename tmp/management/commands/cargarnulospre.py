@@ -1,8 +1,6 @@
-from django.core.management.base import BaseCommand, CommandError
-from tmp.models import escrutinio1
-from comparacion.models import votacion
+from django.core.management.base import BaseCommand
 from django.db import connection
-import requests
+from tmp.models import escrutinio1
 
 
 class Command(BaseCommand):
@@ -38,13 +36,12 @@ class Command(BaseCommand):
         cursor = connection.cursor()
         cursor.execute("TRUNCATE tmp_escrutinio1")
         insert_count = escrutinio1.objects.from_csv('basicos/2uploadpres.csv', delimiter=",")
-        print("{} records cargados en la BD temporal".format(insert_count))
+        print(f'{insert_count} registros cargados en la BD temporal')
         # Cargar datos de bd temporal a columna correspondiente
         cursor.execute("UPDATE comparacion_votacion v SET cne1 = e.votos, acta = e.cod_junta, sufragantes=e.sufragantes, nulos=e.nulos, blancos=e.blancos   FROM tmp_escrutinio1 e WHERE v.cod = e.uid")
         print("Columna de escrutinio actualizada")
 
-
-"""
+        """
         cursor.execute(
             "update comparacion_votacion set diff1 = cne1 - delegados  where delegados is not null and cne1 - delegados <> 0 ")
         cursor.execute(
@@ -67,4 +64,4 @@ class Command(BaseCommand):
             newfile.write(line)
         newfile.close()
         print("diferencias generadas")
-"""
+        """
