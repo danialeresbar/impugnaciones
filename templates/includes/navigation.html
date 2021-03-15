@@ -1,196 +1,238 @@
 {% load permission_tags %}
 {% load static %}
 
+
 <nav class="pcoded-navbar" xmlns="http://www.w3.org/1999/html">
-        <div class="navbar-wrapper">
-            <div class="navbar-brand header-logo">
-                <a target="_blank"  class="b-brand">
-                    <div class="b-bg">
-                        <img src="/static/jazzmin/img/logo.png" width="40" class="rounded-circle"> </img>
+    <div class="navbar-wrapper">
+        <div class="navbar-brand header-logo">
+            <a target="_blank"  class="b-brand">
+                <div class="b-bg">
+                    <img src="{% static 'jazzmin/img/logo.png' %}" alt="Jazz logo" width="40" class="rounded-circle"> </img>
+                </div>
+                <span class="b-title">Impugnaciones</span>
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+        </div>
+
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Navegación</label>
+                </li>
+
+                {% if user|has_role:'abogado__nacional' %}
+                    <div >
+                        <select class="mb-2 form-control" id="provinciaselect"  onchange="myFunction()">
+                            <option value="1"  >AZUAY</option>
+                            <option value="2"  >BOLIVAR</option>
+                            <option value="3"  >CAÑAR</option>
+                            <option value="4"  >CARCHI</option>
+                            <option value="5"  >COTOPAXI</option>
+                            <option value="6"  >CHIMBORAZO</option>
+                            <option value="7"  >EL ORO</option>
+                            <option value="8"  >ESMERALDAS</option>
+                            <option value="9"  >GUAYAS</option>
+                            <option value="10"  >IMBABURA</option>
+                            <option value="11"  >LOJA</option>
+                            <option value="12"  >LOS RIOS</option>
+                            <option value="13"  >MANABI</option>
+                            <option value="14"  >MORONA SANTIAGO</option>
+                            <option value="15"  >NAPO</option>
+                            <option value="16"  >PASTAZA</option>
+                            <option value="17"  >PICHINCHA</option>
+                            <option value="18"  >TUNGURAHUA</option>
+                            <option value="19"  >ZAMORA CHINCHIPE</option>
+                            <option value="20"  >GALAPAGOS</option>
+                            <option value="21"  >SUCUMBIOS</option>
+                            <option value="22"  >ORELLANA</option>
+                            <option value="23"  >STO DGO TSACHILAS</option>
+                            <option value="24"  >SANTA ELENA</option>
+                            <option value="26"  >EUROPA ASIA Y OCEANIA</option>
+                            <option value="27"  >EE.UU CANADA</option>
+                            <option value="28"  >AMERICA LATINA EL CARIBE Y AFRICA</option>
+                        </select>
                     </div>
-                    <span class="b-title">Impugnaciones</span>
-                </a>
-                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
-            </div>
-            <div class="navbar-content scroll-div">
-                <ul class="nav pcoded-inner-navbar">
+                {% endif %}
 
-                    <li class="nav-item pcoded-menu-caption">
-                        <label>Navegacion</label>
-                    </li>
+                <script>
+                    function myFunction() {
+                        var provincia = document.getElementById("provinciaselect").value;
+                        localStorage.setItem("storageName",provincia);
+                        document.getElementById("incidencias").href  = "/comparacion/incidencias/"+provincia;
+                        document.getElementById("valida01").href  = "/comparacion/validacion_presidente/"+provincia;
+                        /*document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
+                        document.getElementById("valida07").href  = "/comparacion/validacion_asamblea_provincial/"+provincia;
+                        document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;*/
+                        document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
+                        /*document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
+                        document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
+                        document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;*/
+                        document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
+                        /*document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
+                        document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
+                        document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;*/
+                    }
+                </script>
 
-
-                    {% if user|has_role:'abogado__nacional' %}
-                        <div >
-
-                            <select class="mb-2 form-control" id="provinciaselect"  onchange="myFunction()">
-                                <option value="1"  >AZUAY</option>
-                                <option value="2"  >BOLIVAR</option>
-                                <option value="3"  >CAÑAR</option>
-                                <option value="4"  >CARCHI</option>
-                                <option value="5"  >COTOPAXI</option>
-                                <option value="6"  >CHIMBORAZO</option>
-                                <option value="7"  >EL ORO</option>
-                                <option value="8"  >ESMERALDAS</option>
-                                <option value="9"  >GUAYAS</option>
-                                <option value="10"  >IMBABURA</option>
-                                <option value="11"  >LOJA</option>
-                                <option value="12"  >LOS RIOS</option>
-                                <option value="13"  >MANABI</option>
-                                <option value="14"  >MORONA SANTIAGO</option>
-                                <option value="15"  >NAPO</option>
-                                <option value="16"  >PASTAZA</option>
-                                <option value="17"  >PICHINCHA</option>
-                                <option value="18"  >TUNGURAHUA</option>
-                                <option value="19"  >ZAMORA CHINCHIPE</option>
-                                <option value="20"  >GALAPAGOS</option>
-                                <option value="21"  >SUCUMBIOS</option>
-                                <option value="22"  >ORELLANA</option>
-                                <option value="23"  >STO DGO TSACHILAS</option>
-                                <option value="24"  >SANTA ELENA</option>
-                                <option value="26"  >EUROPA ASIA Y OCEANIA</option>
-                                <option value="27"  >EE.UU CANADA</option>
-                                <option value="28"  >AMERICA LATINA EL CARIBE Y AFRICA</option>
-                            </select>
-                        </div>
-                    {% endif %}
-
-
-                    <script>
-                        function myFunction() {
-                            var provincia = document.getElementById("provinciaselect").value;
-                            localStorage.setItem("storageName",provincia);
-                            document.getElementById("incidencias").href  = "/comparacion/incidencias/"+provincia;
-                            document.getElementById("valida01").href  = "/comparacion/validacion_presidente/"+provincia;
-                            document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
-                            document.getElementById("valida07").href  = "/comparacion/validacion_asamblea_provincial/"+provincia;
-                            document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;
-                            document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
-                            document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
-                            document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
-                            document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;
-                            document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
-                            document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
-                            document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
-                            document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;
-                        }
-                    </script>
-
-                    <script>
-                     {% if user|has_role:'abogado__nacional' %}
-                        var provincia = localStorage.getItem("storageName");
-                        if (provincia == null){
+                <script>
+                 {% if user|has_role:'abogado__nacional' %}
+                    var provincia = localStorage.getItem("storageName");
+                    if (provincia == null){
                         var provincia =1;
-                        }
-                        document.getElementById('provinciaselect').value = provincia;
-                        {% else %}
-                         var provincia =
-                        {% if user|has_role:'abogado__azuay' %}1;{% endif %}
-                        {% if user|has_role:'abogado__bolivar' %}2;{% endif %}
-                        {% if user|has_role:'abogado__canar' %}3;{% endif %}
-                        {% if user|has_role:'abogado__carchi' %}4;{% endif %}
-                        {% if user|has_role:'abogado__chimborazo' %}5;{% endif %}
-                        {% if user|has_role:'abogado__cotopaxi' %}6;{% endif %}
-                        {% if user|has_role:'abogado__el_oro' %}7;{% endif %}
-                        {% if user|has_role:'abogado__esmeraldas' %}8;{% endif %}
-                        {% if user|has_role:'abogado__guayas' %}9;{% endif %}
-                        {% if user|has_role:'abogado__imbabura' %}10;{% endif %}
-                        {% if user|has_role:'abogado__loja' %}11;{% endif %}
-                        {% if user|has_role:'abogado__los_rios' %}12;{% endif %}
-                        {% if user|has_role:'abogado__manabi' %}13;{% endif %}
-                        {% if user|has_role:'abogado__morona' %}14;{% endif %}
-                        {% if user|has_role:'abogado__napo' %}15;{% endif %}
-                        {% if user|has_role:'abogado__pastaza' %}16;{% endif %}
-                        {% if user|has_role:'abogado__pichincha' %}17;{% endif %}
-                        {% if user|has_role:'abogado__tungurahua' %}18;{% endif %}
-                        {% if user|has_role:'abogado__zamora' %}19;{% endif %}
-                        {% if user|has_role:'abogado__galapagos' %}20;{% endif %}
-                        {% if user|has_role:'abogado__sucumbios' %}21;{% endif %}
-                        {% if user|has_role:'abogado__orellana' %}22;{% endif %}
-                        {% if user|has_role:'abogado__sto__dgo' %}23;{% endif %}
-                        {% if user|has_role:'abogado__santa__elena' %}24;{% endif %}
-                        {% if user|has_role:'abogado__europa' %}26;{% endif %}
-                        {% if user|has_role:'abogado__norte__america' %}27;{% endif %}
-                        {% if user|has_role:'abogado__america__latina' %}28;{% endif %}
-                     {% endif %}
-                    </script>
+                    }
+                    document.getElementById('provinciaselect').value = provincia;
+                    {% else %}
+                     var provincia =
+                    {% if user|has_role:'abogado__azuay' %}1;{% endif %}
+                    {% if user|has_role:'abogado__bolivar' %}2;{% endif %}
+                    {% if user|has_role:'abogado__canar' %}3;{% endif %}
+                    {% if user|has_role:'abogado__carchi' %}4;{% endif %}
+                    {% if user|has_role:'abogado__chimborazo' %}5;{% endif %}
+                    {% if user|has_role:'abogado__cotopaxi' %}6;{% endif %}
+                    {% if user|has_role:'abogado__el_oro' %}7;{% endif %}
+                    {% if user|has_role:'abogado__esmeraldas' %}8;{% endif %}
+                    {% if user|has_role:'abogado__guayas' %}9;{% endif %}
+                    {% if user|has_role:'abogado__imbabura' %}10;{% endif %}
+                    {% if user|has_role:'abogado__loja' %}11;{% endif %}
+                    {% if user|has_role:'abogado__los_rios' %}12;{% endif %}
+                    {% if user|has_role:'abogado__manabi' %}13;{% endif %}
+                    {% if user|has_role:'abogado__morona' %}14;{% endif %}
+                    {% if user|has_role:'abogado__napo' %}15;{% endif %}
+                    {% if user|has_role:'abogado__pastaza' %}16;{% endif %}
+                    {% if user|has_role:'abogado__pichincha' %}17;{% endif %}
+                    {% if user|has_role:'abogado__tungurahua' %}18;{% endif %}
+                    {% if user|has_role:'abogado__zamora' %}19;{% endif %}
+                    {% if user|has_role:'abogado__galapagos' %}20;{% endif %}
+                    {% if user|has_role:'abogado__sucumbios' %}21;{% endif %}
+                    {% if user|has_role:'abogado__orellana' %}22;{% endif %}
+                    {% if user|has_role:'abogado__sto__dgo' %}23;{% endif %}
+                    {% if user|has_role:'abogado__santa__elena' %}24;{% endif %}
+                    {% if user|has_role:'abogado__europa' %}26;{% endif %}
+                    {% if user|has_role:'abogado__norte__america' %}27;{% endif %}
+                    {% if user|has_role:'abogado__america__latina' %}28;{% endif %}
+                 {% endif %}
+                </script>
 
+                <li data-username="Panel de Control de impugnaciones"
+                    class="nav-item {% if 'index' in segment %} active {% endif %}">
+                    <a href="/" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-home"></i>
+                        </span>
+                        <span class="pcoded-mtext">Panel de Control</span>
+                    </a>
+                </li>
 
-                    <li data-username="Panel de Control de impugnaciones"
-                        class="nav-item {% if 'index' in segment %} active {% endif %}">
-                        <a href="/" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span>
-                            <span class="pcoded-mtext">Panel de Control</span></a>
-
-
-                    <li class=""><a id="incidencias" href="/comparacion/incidencias/" class="">Ver Incidencias</a>
+                <li class="">
+                    <a id="incidencias" href="/comparacion/incidencias/" class="">Ver Incidencias</a>
                     <script>
                         document.getElementById("incidencias").href  = "/comparacion/incidencias/"+provincia;
                     </script>
-                    </li>
+                </li>
 
-
-                    <li data-username="VALIDACION" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Validaciones</span></a>
-                        <ul class="pcoded-submenu">
-
-                            <li class=""><a id="valida01" href="/comparacion/validacion_presidente/" class="">Presidente y Vicepresidente</a></li>
-                            <li class=""><a id="valida09" href="/comparacion/validacion_asamblea_nacional/" class="">Asambleistas Nacionales</a></li>
-                            <li class=""><a id="valida07" href="/comparacion/validacion_asamblea_provincial/" class="">Asambleistas Provinciales</a></li>
-                            <li class=""><a id="valida08" href="/comparacion/validacion_andino/" class="">Parlamentarios andinos</a></li>
-                        </ul>
-                        <script>
+                <li data-username="VALIDACION" class="nav-item pcoded-hasmenu">
+                    <a href="javascript:" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-lock"></i>
+                        </span>
+                        <span class="pcoded-mtext">Validaciones</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="">
+                            <a id="valida01" href="/comparacion/validacion_presidente/" class="">Presidente y Vicepresidente</a>
+                        </li>
+                        <!--
+                        <li class="">
+                            <a id="valida09" href="/comparacion/validacion_asamblea_nacional/" class="">Asambleistas Nacionales</a>
+                        </li>
+                        <li class="">
+                            <a id="valida07" href="/comparacion/validacion_asamblea_provincial/" class="">Asambleistas Provinciales</a>
+                        </li>
+                        <li class="">
+                            <a id="valida08" href="/comparacion/validacion_andino/" class="">Parlamentarios andinos</a>
+                        </li>
+                        -->
+                    </ul>
+                    <script>
                         document.getElementById("valida01").href  = "/comparacion/validacion_presidente/"+provincia;
-                        document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
+                        /*document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
                         document.getElementById("valida07").href  = "/comparacion/validacion_asamblea_provincial/"+provincia;
-                        document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;
+                        document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;*/
                     </script>
-                    </li>
+                </li>
 
+                <li data-username="IMPRESION" class="nav-item pcoded-hasmenu">
+                    <a href="javascript:" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-sidebar"></i>
+                        </span>
+                        <span class="pcoded-mtext">Excel - impresion</span>
+                    </a>
+                    <ul class="pcoded-submenu">
 
-                    <li data-username="IMPRESION" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Excel - impresion</span></a>
-                        <ul class="pcoded-submenu">
+                        <li class="">
+                            <a id="excel01" href="/comparacion/excel_presidente/" class="">Presidente y Vicepresidente</a>
+                        </li>
+                        <!--
+                        <li class="">
+                            <a id="excel09" href="/comparacion/excel_asamblea_nacional/" class="">Asambleistas Nacionales</a>
+                        </li>
+                        <li class="">
+                            <a id="excel07" href="/comparacion/excel_asamblea_provincial/" class="">Asambleistas Provinciales</a>
+                        </li>
+                        <li class="">
+                            <a id="excel08" href="/comparacion/excel_andino/" class="">Parlamentarios andinos</a>
+                        </li>
+                        -->
+                    </ul>
+                    <script>
+                        document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
+                        /*document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
+                        document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
+                        document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;*/
+                    </script>
+                </li>
 
-                            <li class=""><a id="excel01" href="/comparacion/excel_presidente/" class="">Presidente y Vicepresidente</a></li>
-                            <li class=""><a id="excel09" href="/comparacion/excel_asamblea_nacional/" class="">Asambleistas Nacionales</a></li>
-                            <li class=""><a id="excel07" href="/comparacion/excel_asamblea_provincial/" class="">Asambleistas Provinciales</a></li>
-                            <li class=""><a id="excel08" href="/comparacion/excel_andino/" class="">Parlamentarios andinos</a></li>
-                        </ul>
-                        <script>
-                            document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
-                            document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
-                            document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
-                            document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;
-                        </script>
-                    </li>
+                <li data-username="Authsdadsentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
+                    <a href="javascript:" class="nav-link ">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-lock"></i>
+                        </span>
+                        <span class="pcoded-mtext">Otras Consultas</span>
+                    </a>
+                    <ul class="pcoded-submenu">
+                        <li class="">
+                            <a id="consulta01" href="/comparacion/consulta_presidente/" class="">Presidente y Vicepresidente</a>
+                        </li>
+                        <!--
+                        <li class="">
+                            <a id="consulta09" href="/comparacion/consulta_asamblea_nacional/" class="">Asambleistas Nacionales</a>
+                        </li>
+                        <li class="">
+                            <a id="consulta07" href="/comparacion/consulta_asamblea_provincial/" class="">Asambleistas Provinciales</a>
+                        </li>
+                        <li class="">
+                            <a id="consulta08" href="/comparacion/consulta_andino/" class="">Parlamentarios andinos</a>
+                        </li>
+                        -->
+                    </ul>
+                    <script>
+                        document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
+                        /*document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
+                        document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
+                        document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;*/
+                    </script>
+                </li>
 
-
-
-                    <li data-username="Authsdadsentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe" class="nav-item pcoded-hasmenu">
-                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Otras Consultas</span></a>
-                        <ul class="pcoded-submenu">
-                            <li class=""><a id="consulta01" href="/comparacion/consulta_presidente/" class="">Presidente y Vicepresidente</a></li>
-                            <li class=""><a id="consulta09" href="/comparacion/consulta_asamblea_nacional/" class="">Asambleistas Nacionales</a></li>
-                            <li class=""><a id="consulta07" href="/comparacion/consulta_asamblea_provincial/" class="">Asambleistas Provinciales</a></li>
-                            <li class=""><a id="consulta08" href="/comparacion/consulta_andino/" class="">Parlamentarios andinos</a></li>
-                        </ul>
-                        <script>
-                            document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
-                            document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
-                            document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
-                            document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;
-                        </script>
-                    </li>
-
-                    <li data-username="Disabled Menu" class="nav-item">
-                        <a href={% url 'logout' %} class="nav-link">
-                            <span class="pcoded-micon">
-                                <i class="feather icon-power"></i>
-                            </span>
-                            <span class="pcoded-mtext">Cerrar sesion - [ {{ request.user.username }} ]</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <li data-username="Disabled Menu" class="nav-item">
+                    <a href={% url 'logout' %} class="nav-link">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-power"></i>
+                        </span>
+                        <span class="pcoded-mtext">Cerrar sesion - [ {{ request.user.username }} ]</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
