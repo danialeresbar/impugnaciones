@@ -3,7 +3,6 @@ from postgres_copy import CopyManager
 
 
 class escrutinio1(models.Model):
-
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     cod_junta = models.IntegerField(null=True)
@@ -19,8 +18,8 @@ class escrutinio1(models.Model):
     def __str__(self):
         return str(self.pk)
 
-class escrutinio2(models.Model):
 
+class escrutinio2(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)
@@ -32,8 +31,8 @@ class escrutinio2(models.Model):
     def __str__(self):
         return str(self.pk)
 
-class escrutinio3(models.Model):
 
+class escrutinio3(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)
@@ -47,7 +46,6 @@ class escrutinio3(models.Model):
 
 
 class escrutinio4(models.Model):
-
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)
@@ -58,9 +56,9 @@ class escrutinio4(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
 
 class preconteo(models.Model):
-
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)
@@ -71,9 +69,9 @@ class preconteo(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
 
 class delegados(models.Model):
-
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)
@@ -85,8 +83,8 @@ class delegados(models.Model):
     def __str__(self):
         return str(self.pk)
 
-class digitacion_nuestra(models.Model):
 
+class digitacion_nuestra(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
     votos = models.IntegerField(null=True)

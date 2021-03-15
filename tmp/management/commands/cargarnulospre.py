@@ -30,8 +30,8 @@ class Command(BaseCommand):
 
         newfile.close()
         print("base de datos convertida a formato MMV")
+        """
 
-"""
         # copiar CSV a BASE DE DATOS TEMPORAL
         cursor = connection.cursor()
         cursor.execute("TRUNCATE tmp_escrutinio1")
