@@ -1,8 +1,10 @@
-from django.contrib import admin
-from django import forms
-from estructura import models
-# from dal_admin_filters import AutocompleteFilter
 # from dal import forward
+# from dal_admin_filters import AutocompleteFilter
+
+from django import forms
+from django.contrib import admin
+
+from estructura import models
 
 
 # class estructura_ParroquiaFilter(AutocompleteFilter):

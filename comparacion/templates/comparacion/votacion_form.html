@@ -1,58 +1,57 @@
-
 {% extends "base.html" %}
 {% load static %}
+
 {% block content %}
     
-<p>
-    <a class="btn btn-light" href="{% url 'comparacion_votacion_list' %}">
-    votacion Listing
-    </a>
-</p>
+    <p>
+        <a class="btn btn-light" href="{% url 'comparacion_votacion_list' %}">votacion Listing</a>
+    </p>
     
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{form.errors}}
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="digitacion_nuestra">digitacion_nuestra: </label>
-  <input class="form-control col-sm-10" id="digitacion_nuestra" type="number" name="digitacion_nuestra" value="{{ object.digitacion_nuestra }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="escrutinio1">escrutinio1: </label>
-  <input class="form-control col-sm-10" id="escrutinio1" type="number" name="escrutinio1" value="{{ object.escrutinio1 }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="escrutinio2">escrutinio2: </label>
-  <input class="form-control col-sm-10" id="escrutinio2" type="number" name="escrutinio2" value="{{ object.escrutinio2 }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="preconteo">preconteo: </label>
-  <input class="form-control col-sm-10" id="preconteo" type="number" name="preconteo" value="{{ object.preconteo }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="delegados">delegados: </label>
-  <input class="form-control col-sm-10" id="delegados" type="number" name="delegados" value="{{ object.delegados }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="link_acta_app">link_acta_app: </label>
-  <input class="form-control col-sm-10" id="link_acta_app" type="text" name="link_acta_app" value="{{ object.link_acta_app }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="link_acta_cne">link_acta_cne: </label>
-  <input class="form-control col-sm-10" id="link_acta_cne" type="text" name="link_acta_cne" value="{{ object.link_acta_cne }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="escrutinio4">escrutinio4: </label>
-  <input class="form-control col-sm-10" id="escrutinio4" type="number" name="escrutinio4" value="{{ object.escrutinio4 }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="digitalizacion_cne">digitalizacion_cne: </label>
-  <input class="form-control col-sm-10" id="digitalizacion_cne" type="number" name="digitacion_cne" value="{{ object.digitacion_cne }}">
-  </div>
-  <div class="form-group row">
-  <label class="col-sm-2 col-form-label" for="escrutinio3">escrutinio3: </label>
-  <input class="form-control col-sm-10" id="escrutinio3" type="number" name="escrutinio3" value="{{ object.escrutinio3 }}">
-  </div>
-  <input type="submit" value="Save" class="btn btn-primary">
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.errors}}
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="digitacion_nuestra">digitacion_nuestra: </label>
+            <input class="form-control col-sm-10" id="digitacion_nuestra" type="number" name="digitacion_nuestra" value="{{ object.digitacion_nuestra }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="escrutinio1">escrutinio1: </label>
+            <input class="form-control col-sm-10" id="escrutinio1" type="number" name="escrutinio1" value="{{ object.escrutinio1 }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="escrutinio2">escrutinio2: </label>
+            <input class="form-control col-sm-10" id="escrutinio2" type="number" name="escrutinio2" value="{{ object.escrutinio2 }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="preconteo">preconteo: </label>
+            <input class="form-control col-sm-10" id="preconteo" type="number" name="preconteo" value="{{ object.preconteo }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="delegados">delegados: </label>
+            <input class="form-control col-sm-10" id="delegados" type="number" name="delegados" value="{{ object.delegados }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="link_acta_app">link_acta_app: </label>
+            <input class="form-control col-sm-10" id="link_acta_app" type="text" name="link_acta_app" value="{{ object.link_acta_app }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="link_acta_cne">link_acta_cne: </label>
+            <input class="form-control col-sm-10" id="link_acta_cne" type="text" name="link_acta_cne" value="{{ object.link_acta_cne }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="escrutinio4">escrutinio4: </label>
+            <input class="form-control col-sm-10" id="escrutinio4" type="number" name="escrutinio4" value="{{ object.escrutinio4 }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="digitalizacion_cne">digitalizacion_cne: </label>
+            <input class="form-control col-sm-10" id="digitalizacion_cne" type="number" name="digitacion_cne" value="{{ object.digitacion_cne }}">
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="escrutinio3">escrutinio3: </label>
+            <input class="form-control col-sm-10" id="escrutinio3" type="number" name="escrutinio3" value="{{ object.escrutinio3 }}">
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary">
+    </form>
 
 {% endblock %}

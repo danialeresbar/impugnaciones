@@ -1,6 +1,6 @@
-from django.urls import path, include
+from django.urls import path
 
-from . import views
+from estructura import views
 
 
 urlpatterns = (
@@ -18,12 +18,28 @@ urlpatterns = (
     path("estructura/Zona/update/<int:pk>/", views.ZonaUpdateView.as_view(), name="estructura_Zona_update"),
     path("estructura/Parroquia/", views.ParroquiaListView.as_view(), name="estructura_Parroquia_list"),
     path("estructura/Parroquia/create/", views.ParroquiaCreateView.as_view(), name="estructura_Parroquia_create"),
-    path("estructura/Parroquia/detail/<int:pk>/", views.ParroquiaDetailView.as_view(), name="estructura_Parroquia_detail"),
-    path("estructura/Parroquia/update/<int:pk>/", views.ParroquiaUpdateView.as_view(), name="estructura_Parroquia_update"),
+    path(
+        "estructura/Parroquia/detail/<int:pk>/",
+        views.ParroquiaDetailView.as_view(),
+        name="estructura_Parroquia_detail"
+    ),
+    path(
+        "estructura/Parroquia/update/<int:pk>/",
+        views.ParroquiaUpdateView.as_view(),
+        name="estructura_Parroquia_update"
+    ),
     path("estructura/Provincia/", views.ProvinciaListView.as_view(), name="estructura_Provincia_list"),
     path("estructura/Provincia/create/", views.ProvinciaCreateView.as_view(), name="estructura_Provincia_create"),
-    path("estructura/Provincia/detail/<int:pk>/", views.ProvinciaDetailView.as_view(), name="estructura_Provincia_detail"),
-    path("estructura/Provincia/update/<int:pk>/", views.ProvinciaUpdateView.as_view(), name="estructura_Provincia_update"),
+    path(
+        "estructura/Provincia/detail/<int:pk>/",
+        views.ProvinciaDetailView.as_view(),
+        name="estructura_Provincia_detail"
+    ),
+    path(
+        "estructura/Provincia/update/<int:pk>/",
+        views.ProvinciaUpdateView.as_view(),
+        name="estructura_Provincia_update"
+    ),
     path('gparroquia-autocomplete/', views.GParroquiaAutocomplete.as_view(), name='gparroquia-autocomplete', ),
     path('gzona-autocomplete/', views.GZonaAutocomplete.as_view(), name='gzona-autocomplete', ),
     path('gcanton-autocomplete/', views.GCantonAutocomplete.as_view(), name='gcanton-autocomplete', ),

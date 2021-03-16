@@ -1,10 +1,11 @@
-from django.contrib import admin
+from dal import forward
+from dal_admin_filters import AutocompleteFilter
+
 from django import forms
-from comparacion import models
+from django.contrib import admin
 from django.utils.html import format_html
 
-from dal_admin_filters import AutocompleteFilter
-from dal import forward
+from comparacion import models
 
 
 class comp_ParroquiaFilter(AutocompleteFilter):
@@ -14,21 +15,21 @@ class comp_ParroquiaFilter(AutocompleteFilter):
 
 
 class comp_ZonaFilter(AutocompleteFilter):
-    title = 'Zona'                    # filter's title
-    field_name = 'zona'           # field name - ForeignKey to Country model
-    autocomplete_url = 'czona-autocomplete' # url name of Country autocomplete view
+    title = 'Zona'  # filter's title
+    field_name = 'zona'  # field name - ForeignKey to Country model
+    autocomplete_url = 'czona-autocomplete'  # url name of Country autocomplete view
 
 
 class comp_CantonFilter(AutocompleteFilter):
-    title = 'Canton'                    # filter's title
-    field_name = 'canton'           # field name - ForeignKey to Country model
-    autocomplete_url = 'ccanton-autocomplete' # url name of Country autocomplete view
+    title = 'Canton'  # filter's title
+    field_name = 'canton'  # field name - ForeignKey to Country model
+    autocomplete_url = 'ccanton-autocomplete'  # url name of Country autocomplete view
 
 
 class comp_ProvinciaFilter(AutocompleteFilter):
-    title = 'Provincia'                    # filter's title
-    field_name = 'provincia'           # field name - ForeignKey to Country model
-    autocomplete_url = 'cprovincia-autocomplete' # url name of Country autocomplete view
+    title = 'Provincia'  # filter's title
+    field_name = 'provincia'  # field name - ForeignKey to Country model
+    autocomplete_url = 'cprovincia-autocomplete'  # url name of Country autocomplete view
 
 
 class comp_cantonForwardFilter(AutocompleteFilter):

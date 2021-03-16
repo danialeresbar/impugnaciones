@@ -1,5 +1,6 @@
 from django import forms
-from . import models
+
+from estructura import models
 
 
 class RecintoForm(forms.ModelForm):
