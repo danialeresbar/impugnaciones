@@ -1,5 +1,6 @@
 import os
 import sys
+from time import tim
 import django
 
 
@@ -12,180 +13,179 @@ from estructura.models import Provincia, Circunscripcion, Canton, Parroquia, Zon
 
 
 # ---------CARGA DE ARCHIVOS BASICOS CNE----------
-def upload_cne_provincias():
-    file = open('basicos/CNE/PROVINCIA.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_PROVINCIA":
-            q = Provincia(codprovincia=columna[0], nomprovincia=columna[1])
-            q.save()
-    print("Carga de provincias completa")
+def upload_cne_provinces():
+    with open('basicos/CNE/PROVINCIA.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_PROVINCIA":
+                Provincia.objects.create(codprovincia=data[0], nomprovincia=data[1])
+        print(f'{len(lines)} Provinces has been loaded successfully!')
 
 
-def upload_circunscripciones():
-    file = open('basicos/CNE/CIRCUNSCRIPCION.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_CIRCUNSCRIPCION":
-            provincia_id = Provincia.objects.get(codprovincia=columna[2])
-            q = Circunscripcion(codcircunscripcion=columna[0], nomcircunscripcion=columna[1], provincia=provincia_id)
-            q.save()
-    print("Carga de Circusncripciones completa")
+def upload_circumscriptions():
+    with open('basicos/CNE/CIRCUNSCRIPCION.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_CIRCUNSCRIPCION":
+                province = Provincia.objects.get(codprovincia=data[2])
+                Circunscripcion.objects.create(
+                    codcircunscripcion=data[0],
+                    nomcircunscripcion=data[1],
+                    provincia=province
+                )
+        print(f'{len(lines)} Circumscriptions has been loaded successfully!')
 
 
-def upload_cantones():
-    file = open('basicos/CNE/CANTON.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_CANTON":
-            provincia_id = Provincia.objects.get(codprovincia=columna[2])
-            if columna[3][0:1] != "0":
-                print(line)
-                circunscripcion_id = Circunscripcion.objects.get(codcircunscripcion=columna[3], provincia=provincia_id)
-                q = Canton(
-                    codcanton=columna[0],
-                    nomcanton=columna[1],
-                    provincia=provincia_id,
-                    circunscripcion=circunscripcion_id
+def upload_cantons():
+    with open('basicos/CNE/CANTON.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_CANTON":
+                province = Provincia.objects.get(codprovincia=data[2])
+                if data[3][0:1] != "0":
+                    circumscription = Circunscripcion.objects.get(codcircunscripcion=data[3], provincia=province)
+                    q = Canton(
+                        codcanton=data[0],
+                        nomcanton=data[1],
+                        provincia=province,
+                        circunscripcion=circumscription
+                    )
+                    q.save()
+                else:
+                    q = Canton(codcanton=data[0], nomcanton=data[1], provincia=province)
+                    q.save()
+        print(f'{len(lines) - 1} Cantons has been loaded successfully!')
+
+
+def upload_parishes():
+    with open('basicos/CNE/PARROQUIA.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_PARROQUIA":
+                canton = Canton.objects.get(codcanton=data[2])
+                if data[3][0:1] != "0":
+                    circumscription = Circunscripcion.objects.get(
+                        codcircunscripcion=data[3],
+                        provincia=canton.provincia
+                    )
+                    q = Parroquia(
+                        codparroquia=data[0],
+                        nomparroquia=data[1],
+                        canton=canton,
+                        circunscripcion=circumscription
+                    )
+                    q.save()
+                else:
+                    q = Parroquia(codparroquia=data[0], nomparroquia=data[1], canton=canton)
+                    q.save()
+        print(f'{len(lines) - 1} Parishes has been loaded successfully!')
+
+
+def upload_zones():
+    with open('basicos/CNE/ZONA.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_ZONA":
+                parish = Parroquia.objects.get(codparroquia=data[2])
+                q = Zona(
+                    codzona=data[0],
+                    nomzona=data[1],
+                    parroquia=parish,
+                    circunscripcion=parish.circunscripcion
                 )
                 q.save()
-            else:
-                q = Canton(codcanton=columna[0], nomcanton=columna[1], provincia=provincia_id)
-                q.save()
-    print("Carga de cantones completa")
+        print(f'{len(lines) - 1} Zones has been loaded successfully!')
 
 
-def upload_parroquias():
-    file = open('basicos/CNE/PARROQUIA.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
+def upload_areas():
+    with open('basicos/CNE/RECINTO.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
     for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_PARROQUIA":
-            canton_id = Canton.objects.get(codcanton=columna[2])
-            if columna[3][0:1] != "0":
-                circunscripcion_id = Circunscripcion.objects.get(
-                    codcircunscripcion=columna[3],
-                    provincia=canton_id.provincia
+        data = line.split(';')
+        if data[0] != "COD_PROVINCIA":
+            parish = Parroquia.objects.get(codparroquia=data[6])
+            if data[9] != "0":
+                zone = Zona.objects.get(parroquia_id=parish.pk, codzona=data[9])
+                q = Recinto(codrecinto=data[11], nomrecinto=data[12], parroquia=parish, zona=zone)
+                q.save()
+            else:
+                q = Recinto(codrecinto=data[11], nomrecinto=data[12], parroquia=parish)
+                q.save()
+    print(f'{len(lines) - 1} Areas has been loaded successfully!')
+
+
+def upload_dignities():
+    with open('basicos/CNE/DIGNIDAD.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_DIGNIDAD":
+                dignidad.objects.create(
+                    coddignidad=data[0],
+                    nomdignidad=data[1]
                 )
-                q = Parroquia(
-                    codparroquia=columna[0],
-                    nomparroquia=columna[1],
-                    canton=canton_id,
-                    circunscripcion=circunscripcion_id
+        print(f'{len(lines) - 1} Dignities has been loaded successfully!')
+
+
+def upload_parties():
+    with open('basicos/CNE/PARTIDOS7.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_DIGNIDAD":
+                province = Provincia.objects.get(codprovincia=data[2])
+                dignity = dignidad.objects.get(coddignidad=data[0])
+                partido.objects.create(
+                    codpartido=data[4],
+                    nompartido=data[7],
+                    provincia=province,
+                    dignidad=dignity
                 )
-                q.save()
-            else:
-                q = Parroquia(codparroquia=columna[0], nomparroquia=columna[1], canton=canton_id)
-                q.save()
-    print("Carga de parroquias completa")
-
-
-def upload_zonas():
-    file = open('basicos/CNE/ZONA.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_ZONA":
-            parroquia_id = Parroquia.objects.get(codparroquia=columna[2])
-            q = Zona(
-                codzona=columna[0],
-                nomzona=columna[1],
-                parroquia=parroquia_id,
-                circunscripcion=parroquia_id.circunscripcion
-            )
-            q.save()
-    print("Carga de zonas completa")
-
-
-def upload_recintos():
-    file = open('basicos/CNE/RECINTO.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_PROVINCIA":
-            parroquia_id = Parroquia.objects.get(codparroquia=columna[6])
-            if columna[9] != "0":
-                zona_id = Zona.objects.get(parroquia_id=parroquia_id.pk, codzona=columna[9])
-                q = Recinto(codrecinto=columna[11], nomrecinto=columna[12], parroquia=parroquia_id, zona=zona_id)
-                q.save()
-            else:
-                q = Recinto(codrecinto=columna[11], nomrecinto=columna[12], parroquia=parroquia_id)
-                q.save()
-    print("Carga de recintos completa")
-
-
-def upload_dignidades():
-    file = open('basicos/CNE/DIGNIDAD.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_DIGNIDAD":
-            print(columna[0])
-            q = dignidad(coddignidad=columna[0], nomdignidad=columna[1])
-            q.save()
-    print("Carga de dignidades completa")
-
-
-def upload_partidos():
-    file = open('basicos/CNE/PARTIDOS7.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_DIGNIDAD":
-            provincia_id = Provincia.objects.get(codprovincia=columna[2])
-            print(columna[7])
-            dignidad_id = dignidad.objects.get(coddignidad=columna[0])
-            q = partido(codpartido=columna[4], nompartido=columna[7], provincia=provincia_id, dignidad=dignidad_id)
-            q.save()
-    print("Carga de partidos completa")
+        print(f'{len(lines) - 1} Parties has been loaded successfully!')
 
 
 def upload_jrvs():
-    file = open('basicos/CNE/JRV.csv', mode='r', encoding='cp1252')
-    lines = file.readlines()
-    file.close()
-    for line in lines:
-        columna = line.split(';')
-        if columna[0] != "COD_PROVINCIA":
-            canton_id = Canton.objects.get(codcanton=columna[4])
-            recinto_id = Recinto.objects.get(codrecinto=columna[11])
-            jrvnum = columna[13] + columna[14]
-            codid = "{:02d}".format(int(columna[0])) + "{:03d}".format(int(columna[4])) + "{:04d}".format(int(columna[6])) + "{:02d}".format(int(columna[9])) + "{:03d}".format(int(columna[13])) + columna[14]
-            q = JRV(
-                provincia=canton_id.provincia,
-                circunscripcion=canton_id.circunscripcion,
-                canton=canton_id,
-                parroquia=recinto_id.parroquia,
-                zona=recinto_id.zona,
-                recinto=recinto_id,
-                cod=codid,
-                numero=columna[13],
-                genero=columna[14],
-                num_electores=columna[15],
-                observaciones="",
-                telefonos=""
-            )
-            q.save()
-    print("Carga de JRVS completa")
+    with open('basicos/CNE/JRV.csv', mode='r', encoding='cp1252') as source:
+        lines = source.readlines()
+        for line in lines:
+            data = line.split(';')
+            if data[0] != "COD_PROVINCIA":
+                canton = Canton.objects.get(codcanton=data[4])
+                area = Recinto.objects.get(codrecinto=data[11])
+                jrvnum = data[13] + data[14]
+                codid = "{:02d}".format(int(data[0])) + "{:03d}".format(int(data[4])) + "{:04d}".format(int(data[6])) + "{:02d}".format(int(data[9])) + "{:03d}".format(int(data[13])) + data[14]
+                q = JRV(
+                    provincia=canton.provincia,
+                    circunscripcion=canton.circunscripcion,
+                    canton=canton,
+                    parroquia=area.parroquia,
+                    zona=area.zona,
+                    recinto=area,
+                    cod=codid,
+                    numero=data[13],
+                    genero=data[14],
+                    num_electores=data[15],
+                    observaciones="",
+                    telefonos=""
+                )
+                q.save()
+        print(f'{len(lines) - 1} JRVs has been loaded successfully!')
 
 
-upload_cne_provincias()
-upload_circunscripciones()
-upload_cantones()
-upload_parroquias()
-upload_zonas()
-upload_recintos()
-upload_dignidades()
-upload_partidos()
+start_time = time()
+upload_cne_provinces()
+upload_circumscriptions()
+upload_cantons()
+upload_parishes()
+upload_zones()
+upload_areas()
+upload_dignities()
+upload_parties()
 upload_jrvs()
+elapsed_time = time() - start_time
+print(f'Elapsed time: {elapsed_time} seconds')
