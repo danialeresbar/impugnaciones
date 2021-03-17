@@ -1,6 +1,6 @@
 import os
 import sys
-from time import tim
+from time import time
 import django
 
 
@@ -20,7 +20,7 @@ def upload_cne_provinces():
             data = line.split(';')
             if data[0] != "COD_PROVINCIA":
                 Provincia.objects.create(codprovincia=data[0], nomprovincia=data[1])
-        print(f'{len(lines)} Provinces has been loaded successfully!')
+        print(f'{len(lines) - 1} Provinces has been loaded successfully!')
 
 
 def upload_circumscriptions():
@@ -35,7 +35,7 @@ def upload_circumscriptions():
                     nomcircunscripcion=data[1],
                     provincia=province
                 )
-        print(f'{len(lines)} Circumscriptions has been loaded successfully!')
+        print(f'{len(lines) - 1} Circumscriptions has been loaded successfully!')
 
 
 def upload_cantons():
