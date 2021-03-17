@@ -1,5 +1,6 @@
 import os
 import sys
+from time import time
 import django
 
 
@@ -17,7 +18,7 @@ def create_jrv_candidato():
     jrvs = JRV.objects.all()
     votacionbulk = []
     uidpartidos = partido.objects.all()
-    nacionalpartidos = uidpartidos.filter(Q(dignidad=1) | Q(dignidad=8) | Q(dignidad=9))
+    nacionalpartidos = uidpartidos.filter(Q(dignidad=1))
     for jrv in jrvs:
         for nacionalpartido in nacionalpartidos:
             uidcod = jrv.cod + "{:02d}".format(nacionalpartido.dignidad.pk) + "{:04d}".format(int(nacionalpartido.codpartido))
@@ -40,4 +41,7 @@ def create_jrv_candidato():
         votacionbulk.clear()
 
 
+start_time = time()
 create_jrv_candidato()
+elapsed_time = time() - start_time
+print(f'Elapsed time: {elapsed_time} seconds')

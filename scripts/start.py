@@ -158,7 +158,8 @@ def upload_jrvs():
                 canton = Canton.objects.get(codcanton=data[4])
                 area = Recinto.objects.get(codrecinto=data[11])
                 jrvnum = data[13] + data[14]
-                codid = "{:02d}".format(int(data[0])) + "{:03d}".format(int(data[4])) + "{:04d}".format(int(data[6])) + "{:02d}".format(int(data[9])) + "{:03d}".format(int(data[13])) + data[14]
+                codid = "{:02d}".format(int(data[0])) + "{:03d}".format(int(data[4])) + "{:04d}".format(int(data[6])) +\
+                        "{:02d}".format(int(data[9])) + "{:03d}".format(int(data[13])) + data[14]
                 q = JRV(
                     provincia=canton.provincia,
                     circunscripcion=canton.circunscripcion,
