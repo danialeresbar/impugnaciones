@@ -79,11 +79,6 @@ class VotacionAdminForm(forms.ModelForm):
 
 class VotacionAdmin(admin.ModelAdmin):
     form = VotacionAdminForm
-
-    class Media:
-        css = {
-            'all': ("styles.css",)
-        }
     list_display = ('codigo_JRV_Partido',)
     readonly_fields = ('cod', 'codigo_JRV_Partido')
 
