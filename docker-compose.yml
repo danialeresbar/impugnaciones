@@ -25,4 +25,4 @@ services:
       POSTGRES_USER: djangouser
       POSTGRES_PASSWORD: postgres
     ports:
-    - "5432:5432"
+    - "50000:5432"
