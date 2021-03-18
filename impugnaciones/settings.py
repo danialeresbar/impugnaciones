@@ -233,6 +233,7 @@ JAZZMIN_SETTINGS = {
         "estructura.partido": "fas fa-flag",
         "estructura.Recinto": "fas fa-home",
         "estructura.Zona": "fas fa-place-of-worship",
+        "estructura.Alert": "fas fa-exclamation-triangle",
         "comparacion.votacion": "fas fa-vote-yea",
         "comparacion.fantasma": "fas fa-ghost",
     },

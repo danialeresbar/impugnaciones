@@ -139,8 +139,18 @@ class Recinto(models.Model):
         return reverse("estructura_Recinto_update", args=(self.pk,))
 
 
-class JRV(models.Model):
+class Alert(models.Model):
+    name = models.CharField(max_length=64, blank=True)
 
+    class Meta:
+        verbose_name = 'Alerta'
+        verbose_name_plural = 'Alertas'
+
+    def __str__(self):
+        return self.name
+
+
+class JRV(models.Model):
     # Relationships
     provincia = models.ForeignKey("estructura.Provincia", on_delete=models.CASCADE)
     circunscripcion = models.ForeignKey("estructura.Circunscripcion", on_delete=models.CASCADE, null=True)
@@ -148,6 +158,7 @@ class JRV(models.Model):
     parroquia = models.ForeignKey("estructura.Parroquia", on_delete=models.CASCADE)
     zona = models.ForeignKey("estructura.Zona", on_delete=models.CASCADE, null=True)
     recinto = models.ForeignKey("estructura.Recinto", on_delete=models.CASCADE)
+    alerts = models.ManyToManyField(Alert)
 
     # Fields
     cod = models.CharField(max_length=30, primary_key=True)

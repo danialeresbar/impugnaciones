@@ -24,3 +24,5 @@ services:
       POSTGRES_DB: impugnaciones
       POSTGRES_USER: djangouser
       POSTGRES_PASSWORD: postgres
+    ports:
+    - "5432:5432"

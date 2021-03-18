@@ -9,7 +9,8 @@ class escrutinio1(models.Model):
     sufragantes = models.IntegerField(null=True)
     blancos = models.IntegerField(null=True)
     nulos = models.IntegerField(null=True)
-    votos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
     objects = CopyManager()
 
     class Meta:
