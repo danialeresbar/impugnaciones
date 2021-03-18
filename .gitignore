@@ -19,7 +19,6 @@ tests/report/
 env/
 venv/
 
-basicos/
 
 media/*
 !media/.keep
