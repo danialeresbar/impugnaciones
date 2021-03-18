@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import generic
 
-from comparacion.models import votacion
+# from comparacion.models import votacion
 from estructura.models import Parroquia, Zona, Canton, Provincia, partido, JRV
 from comparacion import forms
 
@@ -99,46 +99,46 @@ class CProvinciaAutocomplete(autocomplete.Select2QuerySetView):
         return qs
 
 
-class votacionListView(generic.ListView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class votacionCreateView(generic.CreateView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class votacionDetailView(generic.DetailView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class votacionUpdateView(generic.UpdateView):
-    model = votacion
-    form_class = forms.votacionForm
-    pk_url_kwarg = "pk"
-
-
-class fantasmaListView(generic.ListView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class fantasmaCreateView(generic.CreateView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class fantasmaDetailView(generic.DetailView):
-    model = votacion
-    form_class = forms.votacionForm
-
-
-class fantasmaUpdateView(generic.UpdateView):
-    model = votacion
-    form_class = forms.votacionForm
-    pk_url_kwarg = "pk"
+# class votacionListView(generic.ListView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class votacionCreateView(generic.CreateView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class votacionDetailView(generic.DetailView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class votacionUpdateView(generic.UpdateView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#     pk_url_kwarg = "pk"
+#
+#
+# class fantasmaListView(generic.ListView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class fantasmaCreateView(generic.CreateView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class fantasmaDetailView(generic.DetailView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#
+#
+# class fantasmaUpdateView(generic.UpdateView):
+#     model = votacion
+#     form_class = forms.votacionForm
+#     pk_url_kwarg = "pk"
 
 
 #INCIDENCIAS

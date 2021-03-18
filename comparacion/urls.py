@@ -3,18 +3,18 @@ from . import views
 
 
 urlpatterns = [
-    path("comparacion/votacion/", views.votacionListView.as_view(), name="comparacion_votacion_list"),
-    path("comparacion/votacion/create/", views.votacionCreateView.as_view(), name="comparacion_votacion_create"),
-    path(
-        "comparacion/votacion/detail/<int:pk>/",
-        views.votacionDetailView.as_view(),
-        name="comparacion_votacion_detail"
-    ),
-    path(
-        "comparacion/votacion/update/<int:pk>/",
-        views.votacionUpdateView.as_view(),
-        name="comparacion_votacion_update"
-    ),
+    # path("comparacion/votacion/", views.votacionListView.as_view(), name="comparacion_votacion_list"),
+    # path("comparacion/votacion/create/", views.votacionCreateView.as_view(), name="comparacion_votacion_create"),
+    # path(
+    #     "comparacion/votacion/detail/<int:pk>/",
+    #     views.votacionDetailView.as_view(),
+    #     name="comparacion_votacion_detail"
+    # ),
+    # path(
+    #     "comparacion/votacion/update/<int:pk>/",
+    #     views.votacionUpdateView.as_view(),
+    #     name="comparacion_votacion_update"
+    # ),
     path('cparroquia-autocomplete/', views.CParroquiaAutocomplete.as_view(), name='cparroquia-autocomplete', ),
     path('czona-autocomplete/', views.CZonaAutocomplete.as_view(), name='czona-autocomplete', ),
     path('ccanton-autocomplete/', views.CCantonAutocomplete.as_view(), name='ccanton-autocomplete', ),

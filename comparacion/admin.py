@@ -71,38 +71,38 @@ class comp_zonaForwardFilter(AutocompleteFilter):
     print(comp_ParroquiaFilter.forwards)
 
 
-class VotacionAdminForm(forms.ModelForm):
-    class Meta:
-        model = models.votacion
-        fields = "__all__"
+# class VotacionAdminForm(forms.ModelForm):
+#     class Meta:
+#         model = models.votacion
+#         fields = "__all__"
 
 
-class VotacionAdmin(admin.ModelAdmin):
-    form = VotacionAdminForm
-    list_display = ('codigo_JRV_Partido',)
-    readonly_fields = ('cod', 'codigo_JRV_Partido')
-
-    def codigo_JRV_Partido(self, instance):
-        return format_html(
-            '<span class="por_Definir" title="{}">{}</span>',
-            "Informacion de la JRV:\n" +
-            "Provincia  " + str(instance.provincia.codprovincia) + " - " + instance.provincia.nomprovincia +
-            "Canton:    " + str(instance.canton.codcanton) + " - " + instance.canton.nomcanton +
-            "Parroquia: " + str(instance.parroquia.codparroquia) + " - " + instance.parroquia.nomparroquia +
-            "Zona:      " + str(instance.zona.codzona) + " - " + instance.zona.nomzona + "\n" +
-            "Recinto:   " + instance.recinto.nomrecinto + "\n" +
-            "JRV:       " + str(instance.jrv.numero) + instance.jrv.genero + "\n" +
-            "Dignidad:  " + str(instance.dignidad.coddignidad) + " - " + instance.dignidad.nomdignidad + "\n",
-            instance.cod
-        )
-
-    ordering = ("cod",)
-
-    search_fields = [
-        "cod"
-    ]
-
-    list_filter = [comp_ProvinciaFilter, comp_cantonForwardFilter, comp_parroquiaForwardFilter, comp_zonaForwardFilter]
+# class VotacionAdmin(admin.ModelAdmin):
+#     form = VotacionAdminForm
+#     list_display = ('codigo_JRV_Partido',)
+#     readonly_fields = ('cod', 'codigo_JRV_Partido')
+#
+#     def codigo_JRV_Partido(self, instance):
+#         return format_html(
+#             '<span class="por_Definir" title="{}">{}</span>',
+#             "Informacion de la JRV:\n" +
+#             "Provincia  " + str(instance.provincia.codprovincia) + " - " + instance.provincia.nomprovincia +
+#             "Canton:    " + str(instance.canton.codcanton) + " - " + instance.canton.nomcanton +
+#             "Parroquia: " + str(instance.parroquia.codparroquia) + " - " + instance.parroquia.nomparroquia +
+#             "Zona:      " + str(instance.zona.codzona) + " - " + instance.zona.nomzona + "\n" +
+#             "Recinto:   " + instance.recinto.nomrecinto + "\n" +
+#             "JRV:       " + str(instance.jrv.numero) + instance.jrv.genero + "\n" +
+#             "Dignidad:  " + str(instance.dignidad.coddignidad) + " - " + instance.dignidad.nomdignidad + "\n",
+#             instance.cod
+#         )
+#
+#     ordering = ("cod",)
+#
+#     search_fields = [
+#         "cod"
+#     ]
+#
+#     list_filter = [comp_ProvinciaFilter, comp_cantonForwardFilter, comp_parroquiaForwardFilter, comp_zonaForwardFilter]
 
 
 class fantasmaAdminForm(forms.ModelForm):
@@ -117,5 +117,5 @@ class FantasmaAdmin(admin.ModelAdmin):
     readonly_fields = ('uid',)
 
 
-admin.site.register(models.votacion, VotacionAdmin)
+# admin.site.register(models.votacion, VotacionAdmin)
 admin.site.register(models.fantasma, FantasmaAdmin)
