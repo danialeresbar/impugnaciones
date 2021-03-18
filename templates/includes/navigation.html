@@ -58,19 +58,10 @@
                     function myFunction() {
                         var provincia = document.getElementById("provinciaselect").value;
                         localStorage.setItem("storageName",provincia);
-                        document.getElementById("incidencias").href  = "/comparacion/incidencias/"+provincia;
-                        document.getElementById("valida01").href  = "/comparacion/validacion_presidente/"+provincia;
-                        /*document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
-                        document.getElementById("valida07").href  = "/comparacion/validacion_asamblea_provincial/"+provincia;
-                        document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;*/
-                        document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
-                        /*document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
-                        document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
-                        document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;*/
-                        document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
-                        /*document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
-                        document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
-                        document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;*/
+                        document.getElementById("incidencias").href = "/comparacion/incidencias/"+provincia;
+                        document.getElementById("valida01").href = "/comparacion/validacion_presidente/"+provincia;
+                        document.getElementById("consulta01").href = "/comparacion/consulta_presidente/"+provincia;
+                        document.getElementById("excel01").href = "/comparacion/excel_presidente/"+provincia;
                     }
                 </script>
 
@@ -153,23 +144,9 @@
                         <li class="">
                             <a id="valida01" href="/comparacion/validacion_presidente/" class="">Otras alertas</a>
                         </li>
-                        <!--
-                        <li class="">
-                            <a id="valida09" href="/comparacion/validacion_asamblea_nacional/" class="">Asambleistas Nacionales</a>
-                        </li>
-                        <li class="">
-                            <a id="valida07" href="/comparacion/validacion_asamblea_provincial/" class="">Asambleistas Provinciales</a>
-                        </li>
-                        <li class="">
-                            <a id="valida08" href="/comparacion/validacion_andino/" class="">Parlamentarios andinos</a>
-                        </li>
-                        -->
                     </ul>
                     <script>
                         document.getElementById("valida01").href  = "/comparacion/validacion_presidente/"+provincia;
-                        /*document.getElementById("valida09").href  = "/comparacion/validacion_asamblea_nacional/"+provincia;
-                        document.getElementById("valida07").href  = "/comparacion/validacion_asamblea_provincial/"+provincia;
-                        document.getElementById("valida08").href  = "/comparacion/validacion_andino/"+provincia;*/
                     </script>
                 </li>
 
@@ -185,23 +162,9 @@
                         <li class="">
                             <a id="excel01" href="/comparacion/excel_presidente/" class="">Presidente y Vicepresidente</a>
                         </li>
-                        <!--
-                        <li class="">
-                            <a id="excel09" href="/comparacion/excel_asamblea_nacional/" class="">Asambleistas Nacionales</a>
-                        </li>
-                        <li class="">
-                            <a id="excel07" href="/comparacion/excel_asamblea_provincial/" class="">Asambleistas Provinciales</a>
-                        </li>
-                        <li class="">
-                            <a id="excel08" href="/comparacion/excel_andino/" class="">Parlamentarios andinos</a>
-                        </li>
-                        -->
                     </ul>
                     <script>
                         document.getElementById("excel01").href  = "/comparacion/excel_presidente/"+provincia;
-                        /*document.getElementById("excel09").href  = "/comparacion/excel_asamblea_nacional/"+provincia;
-                        document.getElementById("excel07").href  = "/comparacion/excel_asamblea_provincial/"+provincia;
-                        document.getElementById("excel08").href  = "/comparacion/excel_andino/"+provincia;*/
                     </script>
                 </li>
 
@@ -216,23 +179,9 @@
                         <li class="">
                             <a id="consulta01" href="/comparacion/consulta_presidente/" class="">Presidente y Vicepresidente</a>
                         </li>
-                        <!--
-                        <li class="">
-                            <a id="consulta09" href="/comparacion/consulta_asamblea_nacional/" class="">Asambleistas Nacionales</a>
-                        </li>
-                        <li class="">
-                            <a id="consulta07" href="/comparacion/consulta_asamblea_provincial/" class="">Asambleistas Provinciales</a>
-                        </li>
-                        <li class="">
-                            <a id="consulta08" href="/comparacion/consulta_andino/" class="">Parlamentarios andinos</a>
-                        </li>
-                        -->
                     </ul>
                     <script>
                         document.getElementById("consulta01").href  = "/comparacion/consulta_presidente/"+provincia;
-                        /*document.getElementById("consulta09").href  = "/comparacion/consulta_asamblea_nacional/"+provincia;
-                        document.getElementById("consulta07").href  = "/comparacion/consulta_asamblea_provincial/"+provincia;
-                        document.getElementById("consulta08").href  = "/comparacion/consulta_andino/"+provincia;*/
                     </script>
                 </li>
 

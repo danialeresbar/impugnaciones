@@ -18,7 +18,6 @@
                         <i class="feather icon-unlock auth-icon"></i>
                     </div>
                     <h3 class="mb-4">Ingresar a la Plataforma</h3>
-
                     <span class="mb-0 text-muted">
                         {% if msg %}
                             {{ msg | safe }}
@@ -26,22 +25,17 @@
                             Impugnaciones 2021
                         {% endif %} 
                     </span>
-
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
 
                     <form role="form" method="post" action="">
-
-                        {% csrf_token %}                   
-
+                        {% csrf_token %}
                         <div class="input-group mb-3">
                             {{ form.username }}
                         </div>
-                        
                         <div class="input-group mb-4">
                             {{ form.password }}
                         </div>
-                        
                         <div class="form-group text-left">
                             <div class="checkbox checkbox-fill d-inline">
                                 <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
@@ -51,9 +45,8 @@
                         <button type="submit" name="login" class="btn btn-primary shadow-2 mb-4">Login</button>
 
                     </form>
-
-                    <br />
-                                    </div>
+                    <br/>
+                </div>
             </div>
         </div>
     </div>

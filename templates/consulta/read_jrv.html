@@ -1,104 +1,98 @@
 {% load widget_tweaks %}
 
-<div class="modal-header">
-  <h3 class="modal-title">Detalles de JRV</h3>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+    <div class="modal-header">
+        <h3 class="modal-title">Detalles de JRV</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
 <div class="modal-body">
-
     <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Detalle JRV</title>
-    <!-- Bootstrap -->
-  </head>
+    <html lang="es">
+        <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Detalle JRV</title>
+        <!-- Bootstrap -->
+        </head>
 
-  <body>
-  <section>
-      <div class="container">
-          <div class="row">
-              <div class="col-12 text-center">
-                  <table class="table table-striped" width="100%" >
-                      <tbody>
-                      <tr>
-                          <td><H5>Provincia</H5></td>
-                          <td>{{jrvcandidato.provincia}}</td>
-                          <td><H5>Canton</H5></td>
-                          <td>{{jrvcandidato.canton}} &nbsp;</td>
-                      </tr>
-                      <tr>
-                          <td><h5>Parroquia</h5></td>
-                          <td>{{jrvcandidato.parroquia}}</td>
-                          <td><h5>Zona</h5></td>
-                          <td>{{jrvcandidato.zona}}</td>
-                      </tr>
-                      <tr>
-                          <td><h5>Recinto</h5></td>
-                          <td>{{jrvcandidato.recinto}} </td>
-                          <td><h5>Jrv</h5></td>
-                          <td>{{jrvcandidato.jrv.numero}}{{jrvcandidato.jrv.genero}}</td>
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+        <body>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <table class="table table-striped" width="100%" >
+                                <tbody>
+                                    <tr>
+                                        <td><H5>Provincia</H5></td>
+                                        <td>{{jrvcandidato.provincia}}</td>
+                                        <td><H5>Canton</H5></td>
+                                        <td>{{jrvcandidato.canton}} &nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5>Parroquia</h5></td>
+                                        <td>{{jrvcandidato.parroquia}}</td>
+                                        <td><h5>Zona</h5></td>
+                                        <td>{{jrvcandidato.zona}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><h5>Recinto</h5></td>
+                                        <td>{{jrvcandidato.recinto}} </td>
+                                        <td><h5>Jrv</h5></td>
+                                        <td>{{jrvcandidato.jrv.numero}}{{jrvcandidato.jrv.genero}}</td>
+                                    </tr>
+                                </tbody>
+                          </table>
+                      </div>
+                    </div>
 
-          <hr>
-          <div class="row" style="background-color: #d8f0f9">
-              <p></p>
-
-              <div class="col-md-6 col-12 text-center">
-
-                  <img class="img-fluid" src="/static/assets/images/actaprueba.jpg" alt="">
-                  <p></p>
-                  <h4>Acta Delegados</h4>
-              </div>
-              <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
-                  <img class="img-fluid" src="/static/assets/images/actaprueba.jpg" alt="">
-                  <p></p>
-                  <h4>Acta Digitacion</h4>
-              </div>
-          </div>
-      </div>
-  </section>
-  <hr>
-
-
- </body>
-</html>
+                    <hr>
+                    <div class="row" style="background-color: #d8f0f9">
+                        <p></p>
+                        <div class="col-md-6 col-12 text-center">
+                            <img class="img-fluid" src="/static/assets/images/actaprueba.jpg" alt="">
+                            <p></p>
+                            <h4>Acta Delegados</h4>
+                        </div>
+                        <div class="col-md-6 col-12 text-center mt-md-0 mt-2">
+                            <img class="img-fluid" src="/static/assets/images/actaprueba.jpg" alt="">
+                            <p></p>
+                            <h4>Acta Digitacion</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <hr>
+        </body>
+    </html>
     <table id="books-table" cellspacing="0" cellpadding="0" style="table-layout:fixed" width="100%" class="cssTable table-striped ">
         <thead>
-        <tr>
-            <th class="text-center" scope="col">Candidato</th>
-            <th class="text-center" scope="col">Delegados</th>
-            <th class="text-center" scope="col">App_Digitacion</th>
-            <th class="text-center" scope="col">CNE 1</th>
-            <th class="text-center" scope="col">Conteo Rapido CNE</th>
-            <th class="text-center" scope="col">OCR Nuestro a CNE</th>
-        </tr>
+            <tr>
+                <th class="text-center" scope="col">Candidato</th>
+                <th class="text-center" scope="col">Delegados</th>
+                <th class="text-center" scope="col">App_Digitacion</th>
+                <th class="text-center" scope="col">CNE 1</th>
+                <th class="text-center" scope="col">Conteo Rapido CNE</th>
+                <th class="text-center" scope="col">OCR Nuestro a CNE</th>
+            </tr>
         </thead>
         <tbody>
-        {% for votacion in votacion_list %}
-            <tr>
-                <td>{{ votacion.partido }}</td>
-                <td class="text-center">{{ votacion.delegados }}</td>
-                <td class="text-center">{{ votacion.app_digitacion }}</td>
-                <td class="text-center">{{ votacion.cne1 }}</td>
-                <td class="text-center">{{ votacion.conteo_rapido_cne }}</td>
-                <td class="text-center">{{ votacion.ocr_nuestro_actas_cne }}</td>
-            </tr>
-        {% endfor %}
+            {% for votacion in votacion_list %}
+                <tr>
+                    <td>{{ votacion.partido }}</td>
+                    <td class="text-center">{{ votacion.delegados }}</td>
+                    <td class="text-center">{{ votacion.app_digitacion }}</td>
+                    <td class="text-center">{{ votacion.cne1 }}</td>
+                    <td class="text-center">{{ votacion.conteo_rapido_cne }}</td>
+                    <td class="text-center">{{ votacion.ocr_nuestro_actas_cne }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
     </div>
-
 </div>
