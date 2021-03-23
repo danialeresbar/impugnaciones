@@ -3,19 +3,20 @@
 from django.core.management.base import BaseCommand
 from django.db import connection
 from tmp.models import escrutinio1
-
+from estructura.models import JRV
 
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         self.create_cne_files()
         self.update_jrvs()
+        self.find_ghost_jrvs()
 
     def create_cne_files(self):
         with open('scripts/basicos/2uploadpresarauz.csv', 'w') as destiny_arauz, open('scripts/basicos/2uploadpreslasso.csv', 'w') as destiny_lasso:
             destiny_arauz.write("uid,cod_junta,sufragantes,nulos,blancos,arauz_votes\n")
             destiny_lasso.write("uid,lasso_votes\n")
-            with open('scripts/basicos/CNE/PRESIDENTA_E_Y_VICEPRESIDENTA_E_2davuelta_test.csv', mode='r', encoding='cp1252') as source:
+            with open('scripts/basicos/CNE/resultados2da.csv', mode='r', encoding='cp1252') as source:
                 # lines = requests.get("https://impugnaciones.andresarauz.ec/resultados/resultados_1.csv").text.split("\n")
                 lines = source.readlines()
                 for line in lines:
@@ -48,6 +49,20 @@ class Command(BaseCommand):
         print(f'{insert_count} registros cargados en la BD temporal')
         cursor.execute(
             "UPDATE estructura_jrv v SET cne_lasso = e.lasso_votes FROM tmp_escrutinio1 e WHERE v.cod = e.uid")
+
+    def find_ghost_jrvs(self):
+        jrvs = JRV.objects.all()
+        with open('scripts/basicos/2uploadpresarauz.csv', 'r') as destiny_arauz, open(
+            'scripts/basicos/2uploadpreslasso.csv', 'w') as destiny_lasso:
+            linesarauz = destiny_arauz.readlines()
+            print("revisando mesas fantasma...")
+            for line in linesarauz:
+                columna = line.split(',')
+                try:
+                    jrvactual= jrvs.get(cod=columna[0])
+                except Exception as e:
+                    print(columna[0])
+                    #print(f'Error: \n{e}')
 
         # cursor.execute(
         #     "update comparacion_votacion set diff1 = cne1 - delegados  where delegados is not null and cne1 - delegados <> 0 ")

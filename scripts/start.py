@@ -14,7 +14,7 @@ from estructura.models import Provincia, Circunscripcion, Canton, Parroquia, Zon
 
 # ---------CARGA DE ARCHIVOS BASICOS CNE----------
 def upload_cne_provinces():
-    with open('scripts/basicos/CNE/PROVINCIA.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/PROVINCIA.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -24,7 +24,7 @@ def upload_cne_provinces():
 
 
 def upload_circumscriptions():
-    with open('scripts/basicos/CNE/CIRCUNSCRIPCION.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/CIRCUNSCRIPCION.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -39,7 +39,7 @@ def upload_circumscriptions():
 
 
 def upload_cantons():
-    with open('scripts/basicos/CNE/CANTON.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/CANTON.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -61,7 +61,7 @@ def upload_cantons():
 
 
 def upload_parishes():
-    with open('scripts/basicos/CNE/PARROQUIA.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/PARROQUIA.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -86,7 +86,7 @@ def upload_parishes():
 
 
 def upload_zones():
-    with open('scripts/basicos/CNE/ZONA.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/ZONA.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -103,7 +103,7 @@ def upload_zones():
 
 
 def upload_areas():
-    with open('scripts/basicos/CNE/RECINTO.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/RECINTO.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
     for line in lines:
         data = line.split(';')
@@ -120,7 +120,7 @@ def upload_areas():
 
 
 def upload_dignities():
-    with open('scripts/basicos/CNE/DIGNIDAD.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/DIGNIDAD.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -133,7 +133,7 @@ def upload_dignities():
 
 
 def upload_parties():
-    with open('scripts/basicos/CNE/PARTIDOS7.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/PARTIDOS7.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')
@@ -150,7 +150,7 @@ def upload_parties():
 
 
 def upload_jrvs():
-    with open('scripts/basicos/CNE/JRV.csv', mode='r', encoding='cp1252') as source:
+    with open('basicos/CNE/JRV.csv', mode='r', encoding='cp1252') as source:
         lines = source.readlines()
         for line in lines:
             data = line.split(';')

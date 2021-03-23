@@ -244,7 +244,7 @@ def Validacion_presidente(request, pk_test):
     else:
         donde = ' and estructura_jrv.provincia_id=' + pk_test
 
-    jrv_list = JRV.objects.raw('select * from estructura_jrv where estructura_jrv.no_procede <> True and estructura_jrv.para_reclamar <> True and estructura_jrv.para_validar = True' + donde + ' order by maxdiff DESC')
+    jrv_list = JRV.objects.raw('select * from estructura_jrv where estructura_jrv.no_procede <> True and estructura_jrv.para_reclamar <> True and estructura_jrv.para_validar = True' + donde )   #  + ' order by maxdiff DESC'
     valores.vcount = len(jrv_list)
     print(jrv_list)
     context = {'valores': valores, 'canton_list': canton_list, "jrv_list": jrv_list}

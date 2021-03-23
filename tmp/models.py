@@ -23,7 +23,12 @@ class escrutinio1(models.Model):
 class escrutinio2(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
+    cod_junta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
     objects = CopyManager()
 
     class Meta:
@@ -36,7 +41,12 @@ class escrutinio2(models.Model):
 class escrutinio3(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
+    cod_junta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
     objects = CopyManager()
 
     class Meta:
@@ -49,7 +59,29 @@ class escrutinio3(models.Model):
 class escrutinio4(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
+    cod_junta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
+    objects = CopyManager()
+    class Meta:
+        pass
+
+    def __str__(self):
+        return str(self.pk)
+
+
+class aplicacion(models.Model):
+    # Fields
+    uid = models.CharField(max_length=30, primary_key=True)
+    cod_junta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
     objects = CopyManager()
 
     class Meta:
@@ -59,36 +91,15 @@ class escrutinio4(models.Model):
         return str(self.pk)
 
 
-class preconteo(models.Model):
+class old_cne(models.Model):
     # Fields
     uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
-    objects = CopyManager()
-
-    class Meta:
-        pass
-
-    def __str__(self):
-        return str(self.pk)
-
-
-class delegados(models.Model):
-    # Fields
-    uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
-    objects = CopyManager()
-
-    class Meta:
-        pass
-
-    def __str__(self):
-        return str(self.pk)
-
-
-class digitacion_nuestra(models.Model):
-    # Fields
-    uid = models.CharField(max_length=30, primary_key=True)
-    votos = models.IntegerField(null=True)
+    cod_junta = models.IntegerField(null=True)
+    sufragantes = models.IntegerField(null=True)
+    blancos = models.IntegerField(null=True)
+    nulos = models.IntegerField(null=True)
+    arauz_votes = models.IntegerField(null=True)
+    lasso_votes = models.IntegerField(null=True)
     objects = CopyManager()
 
     class Meta:

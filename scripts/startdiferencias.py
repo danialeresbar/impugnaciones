@@ -6,17 +6,22 @@ sys.path.append('/src')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'impugnaciones.settings'
 django.setup()
 
-from comparacion.models import votacion
+from estructura.models import JRV
 from django.db import connection
 
 
 # ---------CREACION DE UIDS----------
 def get_diffs():
     cursor = connection.cursor()
-    cursor.execute(
-        "update comparacion_votacion set diff1 = cne1 - delegados  where delegados is not null and cne1 - delegados <> 0 ")
-    cursor.execute(
-        "update comparacion_votacion set diff2 = cne1 - app_digitacion  where app_digitacion is not null and cne1 - app_digitacion <> 0 ")
+    cursor.execute("update estructura_jrv set quitaron = cne_arauz - app_arauz  where  cne_arauz - app_arauz <> 0 ")
+    cursor.execute("update estructura_jrv set quitaron = cne_lasso - app_lasso  where  cne_lasso - app_lasso <> 0")
+    cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - app_arauz <> 0 ")
+    cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - app_lasso <> 0 ")
+   #  4%   arreglar sufragantes/votos  ->
+   #  cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - old_cne_arauz <> 0 ")
+   # cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - old_cne_lasso <> 0 ")
+
+    """
     newfile = open('basicos/diferencias.csv', 'w')
     uidJRVDigpartidos = votacion.objects.raw(
         'select * from comparacion_votacion where diff1 is not null or diff2 is not null'
@@ -34,6 +39,6 @@ def get_diffs():
                str(uid.partido.codpartido) + "," + str(uid.cne1) + "," + str(uid.diff1) + "," + str(uid.diff2) + "\n"
         newfile.write(line)
     newfile.close()
-
+"""
 
 get_diffs()
