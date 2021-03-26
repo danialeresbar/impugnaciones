@@ -22,26 +22,33 @@ class AlertManager:
 
     @classmethod
     def unes_cne_alert(cls):
-        for index, alert in cls.ALERTS.items():
-            print(f'Index:{index} - Alert: {alert}')
         with connection.cursor() as cursor:
             cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar) = (cne_arauz - app_arauz, True)  WHERE  cne_arauz - app_arauz <> 0 ")
-            for row in cursor.fetchall():
-                print(row)
-            cursor.execute("update estructura_jrv set (quitaron, para_validar) = (cne_lasso - app_lasso, True)  WHERE cne_lasso - app_lasso <> 0")
+            cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar) = (cne_lasso - app_lasso, True)  WHERE cne_lasso - app_lasso <> 0")
+            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+
+    @classmethod
+    def non_suffragettes_alert(cls):
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cnesufragantes < 0 ")
+            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+
+    @classmethod
+    def total_votes_alert(cls):
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cne_arauz + app_arauz > 350")
+            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+
+    @classmethod
+    def arauz_votes_alert(cls):
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cne_arauz + app_arauz < 0")
+            # TODO: Obtener los registros modificados para asignar la respectiva alerta
 
 
 # ---------CREACION DE UIDS----------
 def get_diffs():
-    cursor = connection.cursor()
-    cursor.execute("update estructura_jrv set quitaron = cne_arauz - app_arauz  where  cne_arauz - app_arauz <> 0 ")
-    cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - app_arauz <> 0 ")
-    cursor.execute("update estructura_jrv set quitaron = cne_lasso - app_lasso  where  cne_lasso - app_lasso <> 0")
-    cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - app_lasso <> 0 ")
-    # 4%   arreglar sufragantes/votos  ->
-    # cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - old_cne_arauz <> 0 ")
-    # cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - old_cne_lasso <> 0 ")
-
+    pass
     """
     newfile = open('basicos/diferencias.csv', 'w')
     uidJRVDigpartidos = votacion.objects.raw(
@@ -60,7 +67,7 @@ def get_diffs():
                str(uid.partido.codpartido) + "," + str(uid.cne1) + "," + str(uid.diff1) + "," + str(uid.diff2) + "\n"
         newfile.write(line)
     newfile.close()
-"""
+    """
 
 
 AlertManager.unes_cne_alert()

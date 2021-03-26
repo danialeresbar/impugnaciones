@@ -23,7 +23,10 @@ compilemessages:
 	docker exec -it impugnaciones django-admin compilemessages
 
 loadbasics:
-	docker exec -it impugnaciones python scripts/start.py
+	docker exec -it impugnaciones python scripts/initial.py
+
+differences:
+	docker exec -it impugnaciones python scripts/differences.py
 
 loadmmv:
 	docker exec -it impugnaciones ./manage.py cargarmmv
