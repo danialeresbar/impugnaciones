@@ -1,25 +1,46 @@
 import os
 import sys
 import django
+from django.db import connection
 
+# For Docker container
 sys.path.append('/src')
+# For production server
+sys.path.append('/home/administrator/impugnaciones')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'impugnaciones.settings'
 django.setup()
 
-from estructura.models import JRV
-from django.db import connection
+from estructura.models import Alert, JRV
+
+
+class AlertManager:
+    """
+
+    """
+
+    ALERTS = {index: alert for index, alert in enumerate(Alert.objects.all())}
+
+    @classmethod
+    def unes_cne_alert(cls):
+        for index, alert in cls.ALERTS.items():
+            print(f'Index:{index} - Alert: {alert}')
+        with connection.cursor() as cursor:
+            cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar) = (cne_arauz - app_arauz, True)  WHERE  cne_arauz - app_arauz <> 0 ")
+            for row in cursor.fetchall():
+                print(row)
+            cursor.execute("update estructura_jrv set (quitaron, para_validar) = (cne_lasso - app_lasso, True)  WHERE cne_lasso - app_lasso <> 0")
 
 
 # ---------CREACION DE UIDS----------
 def get_diffs():
     cursor = connection.cursor()
     cursor.execute("update estructura_jrv set quitaron = cne_arauz - app_arauz  where  cne_arauz - app_arauz <> 0 ")
-    cursor.execute("update estructura_jrv set quitaron = cne_lasso - app_lasso  where  cne_lasso - app_lasso <> 0")
     cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - app_arauz <> 0 ")
+    cursor.execute("update estructura_jrv set quitaron = cne_lasso - app_lasso  where  cne_lasso - app_lasso <> 0")
     cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - app_lasso <> 0 ")
-   #  4%   arreglar sufragantes/votos  ->
-   #  cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - old_cne_arauz <> 0 ")
-   # cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - old_cne_lasso <> 0 ")
+    # 4%   arreglar sufragantes/votos  ->
+    # cursor.execute("update estructura_jrv set para_validar = True where  cne_arauz - old_cne_arauz <> 0 ")
+    # cursor.execute("update estructura_jrv set para_validar = True where  cne_lasso - old_cne_lasso <> 0 ")
 
     """
     newfile = open('basicos/diferencias.csv', 'w')
@@ -41,4 +62,6 @@ def get_diffs():
     newfile.close()
 """
 
-get_diffs()
+
+AlertManager.unes_cne_alert()
+# get_diffs()
