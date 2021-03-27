@@ -10,7 +10,7 @@ sys.path.append('/home/administrator/impugnaciones')
 os.environ['DJANGO_SETTINGS_MODULE'] = 'impugnaciones.settings'
 django.setup()
 
-from estructura.models import Alert, JRV
+from estructura.models import JRV
 
 
 class AlertManager:
@@ -18,32 +18,38 @@ class AlertManager:
 
     """
 
-    ALERTS = {index: alert for index, alert in enumerate(Alert.objects.all())}
-
     @classmethod
     def unes_cne_alert(cls):
         with connection.cursor() as cursor:
-            cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar) = (cne_arauz - app_arauz, True)  WHERE  cne_arauz - app_arauz <> 0 ")
-            cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar) = (cne_lasso - app_lasso, True)  WHERE cne_lasso - app_lasso <> 0")
-            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+            cursor.execute("UPDATE estructura_jrv SET (pusieron, para_validar, unes_cne_alert) = (cne_lasso - app_lasso, TRUE, TRUE)  WHERE cne_lasso - app_lasso > 0")
+            cursor.execute("UPDATE estructura_jrv SET (quitaron, para_validar, unes_cne_alert) = (app_arauz - cne_arauz, TRUE, TRUE)  WHERE  app_arauz - cne_arauz > 0 ")
+            cursor.execute("SELECT * FROM estructura_jrv WHERE unes_cne_alert = TRUE")
+            for row in cursor.fetchall():
+                print(row)
 
     @classmethod
     def non_suffragettes_alert(cls):
         with connection.cursor() as cursor:
-            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cnesufragantes < 0 ")
-            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+            cursor.execute("UPDATE estructura_jrv SET (para_validar, suffragettes_alert) = (TRUE, TRUE) WHERE cnesufragantes = 0 ")
+            cursor.execute("SELECT * FROM estructura_jrv WHERE suffragettes_alert = TRUE")
+            for row in cursor.fetchall():
+                print(row)
 
     @classmethod
     def total_votes_alert(cls):
         with connection.cursor() as cursor:
-            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cne_arauz + app_arauz > 350")
-            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+            cursor.execute("UPDATE estructura_jrv SET (para_validar, suffragettes_votes_alert) = (True) WHERE cnesufragantes > 350")
+            cursor.execute("SELECT * FROM estructura_jrv WHERE suffragettes_votes_alert = TRUE")
+            for row in cursor.fetchall():
+                print(row)
 
     @classmethod
     def arauz_votes_alert(cls):
         with connection.cursor() as cursor:
-            cursor.execute("UPDATE estructura_jrv SET (para_validar) = (True) WHERE cne_arauz + app_arauz < 0")
-            # TODO: Obtener los registros modificados para asignar la respectiva alerta
+            cursor.execute("UPDATE estructura_jrv SET (para_validar, arauz_votes_alert) = (True) WHERE cne_arauz = 0")
+            cursor.execute("SELECT * FROM estructura_jrv WHERE arauz_votes_alert = TRUE")
+            for row in cursor.fetchall():
+                print(row)
 
 
 # ---------CREACION DE UIDS----------
@@ -71,4 +77,3 @@ def get_diffs():
 
 
 AlertManager.unes_cne_alert()
-# get_diffs()

@@ -15,78 +15,88 @@
 
 {% block content %}
 
-
-<div class="pcoded-content">
+    <div class="pcoded-content">
         <!-- [ breadcrumb ] start -->
+        {% if mensaje %}
+            <script>
+                alert('{{ mensaje }}');
+            </script>
+        {% endif %}
 
-    {% if mensaje %}
-        <script>
-            alert('{{ mensaje }}');
-        </script>
-    {% endif %}
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Validacion Presidencia y Vicepresidencia</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Validaciones</a></li>
-                            <li class="breadcrumb-item"><a href="javascript:">Presidencia y Vicepresidencia</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h5 class="m-b-10">Items en consulta:</h5> <h5>{{valores.vcount }}</h5>
-                    </div>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Alertas Presidencia y Vicepresidencia</h5>
                 </div>
-
-
-
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#!">Alertas</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:">Presidencia y Vicepresidencia</a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h5 class="m-b-10">Items en consulta:</h5> <h5>{{valores.vcount }}</h5>
+            </div>
+        </div>
         <!-- [ breadcrumb ] end -->
+
         <div class="card card-body">
-
-
             <style>
                 .name { font-weight: bold; }
                 .subtext { font-size: smaller; }
             </style>
 
+            <form method="post">
+                {% csrf_token %}
 
-        <form method="post">
-            {% csrf_token %}
+                <div class="row">
 
-            <div class="row">
-                <div class="col-md-3">
-                <center><h3>{{ valores.vprovincia }}</h3></center>
+                    <div class="col-md-3">
+                        <h3>{{ filters.province }}</h3>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="mb-3 form-control" name="canton" id="canton">
+                            <option value="*">Todos los Cantones</option>
+                            {% for canton in cantons %}
+                                <option value="{{canton.pk}}" >{{canton}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select class="mb-3 form-control" name="alert" id="alert">
+                            <option value="*" >Todas las alertas</option>
+                            <option value="unes_cne_alert">Diferencia CNE-UNES</option>
+                            <option value="suffragettes_votes_alert">Total de votos diferente a sufragantes</option>
+                            <option value="suffragettes_alert">Sufragantes = 0</option>
+                            <option value="suffragettes_first_alert">Sufragantes 4% > 1ra vuelta</option>
+                            <option value="null_votes_alert">Nulos 4% > 1ra vuelta</option>
+                            <option value="blank_votes_alert">Blancos 4% > 1ra vuelta</option>
+                            <option value="arauz_votes_alert">Votos Arauz = 0</option>
+                            <option value="max_total_votes_alert">Total de votos > 350</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select class="mb-3 form-control" name="validar" id="validate">
+                            <option value="">Todas las JRV a validar</option>
+                            <option value="sin_validar" selected>Sin Validar</option>
+                            <option value="para_reclamar">Para Reclamar</option>
+                            <option value="no_procede">No Procede Reclamacion</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-1">
+                        <input type="submit" class="btn btn-primary" name="filtrar"  value="Buscar">
+                    </div>
                 </div>
+                <script>
+                    document.getElementById('canton').value = {{ filters.canton }};
+                    document.getElementById('alert').value = '{{ filters.alert }}';
+                </script>
 
-                <div class="col-md-3">
-                    <select class="mb-3 form-control" name="canton" id="canton">
-                        <option value="*" selected >Todos los Cantones</option>
-                        {% for canton in canton_list %}
-                            <option value="{{canton.pk}}" >{{canton}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-
-               <div class="col-md-3">
-                    <select class="mb-3 form-control" name="validar" id="canton">
-                        <option value="todos">Todas las JRV a validar</option>
-                        <option value="sin_validar"selected>Sin Validar</option>
-                        <option value="para_reclamar">Para Reclamar</option>
-                        <option value="no_procede">No Procede Reclamacion</option>
-                    </select>
-                </div>
-
-                <div class="col-md-3">
-                    <input type="submit" class="btn btn-primary" name="filtrar"  value="Buscar">
-                </div>
-            </div>
-            <script>
-                document.getElementById('canton').value = {{valores.vcanton}};
-            </script>
-
-            <div class="row">
+                <div class="row">
                     <!-- [ stiped-table ] start -->
                     {% autopaginate jrv_list 20 %}
                     <table id="books-table" class="table-striped tall-row">
@@ -105,7 +115,7 @@
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td >
-                                <span class="name">{{ jrv.canton }} |{{ jrv.parroquia }} | Zona {{ jrv.zona }}</span>  <br/>
+                                    <span class="name">{{ jrv.canton }} |{{ jrv.parroquia }} | Zona {{ jrv.zona }}</span>  <br/>
                                     <span class="subtext">{{ jrv.recinto }}</span></td>
 
                                 <td>{{ jrv.numero }}{{ jrv.genero }}</td>
@@ -125,7 +135,7 @@
                     {% paginate  using "includes/pagination.html" %}
                     <!-- [ stiped-table ] end -->
                 </div>
-        </form>
+            </form>
         </div>
     </div>
 

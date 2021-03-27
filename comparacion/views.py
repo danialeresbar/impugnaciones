@@ -226,29 +226,45 @@ def JRVViewIncidencia(request, pk):
 #VALIDACION PRESIDENTE
 @login_required(login_url="/login/")
 def Validacion_presidente(request, pk_test):
-    class valores:
-        vcanton = ""
-        vprovincia = Provincia.objects.get(codprovincia=pk_test)
-        vcount = 0
+    class Filters:
+        canton = ''
+        alert = ''
+        province = Provincia.objects.get(codprovincia=pk_test)
+        count = 0
 
-    canton_list = Canton.objects.raw('select * from estructura_canton where estructura_canton.provincia_id=' + pk_test)
+    cantons = Canton.objects.raw(f'SELECT * FROM estructura_canton WHERE estructura_canton.provincia_id={pk_test}')
 
-    print("validacion")
     if request.method == "POST":
-        if request.POST.get('canton') == "*":
-            canton = ''
-        else:
-            canton = ' and estructura_jrv.canton_id =' + request.POST.get('canton')
-        valores.vcanton = request.POST.get('canton')
-        donde = ' and provincia_id=' + pk_test + canton
-    else:
-        donde = ' and estructura_jrv.provincia_id=' + pk_test
+        canton_id = request.POST.get('canton')
+        alert_id = request.POST.get('alert')
 
-    jrv_list = JRV.objects.raw('select * from estructura_jrv where estructura_jrv.no_procede <> True and estructura_jrv.para_reclamar <> True and estructura_jrv.para_validar = True' + donde )   #  + ' order by maxdiff DESC'
-    valores.vcount = len(jrv_list)
-    print(jrv_list)
-    context = {'valores': valores, 'canton_list': canton_list, "jrv_list": jrv_list}
-    return render(request, 'validacion/validacion_presidente.html', context)
+        if canton_id == "*":
+            canton_filter = ''
+        else:
+            canton_filter = f' and canton_id ={canton_id}'
+
+        if alert_id != '*':
+            alert_filter = f' and {alert_id} = TRUE'
+        else:
+            alert_filter = ''
+
+        Filters.canton = canton_id
+        Filters.alert = alert_id
+        jrv_filter = ' and provincia_id=' + pk_test + canton_filter + alert_filter
+    else:
+        jrv_filter = ' and provincia_id=' + pk_test
+
+    jrvs = JRV.objects.raw(f'SELECT * FROM estructura_jrv WHERE no_procede <> TRUE and para_reclamar <> True and para_validar = TRUE {jrv_filter}')   #  + ' order by maxdiff DESC'
+    Filters.count = len(jrvs)
+    return render(
+        request,
+        'validacion/validacion_presidente.html',
+        {
+            'filters': Filters,
+            'cantons': cantons,
+            'jrv_list': jrvs
+        }
+    )
 
 
 #VALIDACION EDIT PRESIDENTE
