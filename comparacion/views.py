@@ -7,9 +7,6 @@ from django.contrib.auth.decorators import  login_required
 from django.db import connection
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views import generic
-
-# from comparacion.models import votacion
 from estructura.models import Parroquia, Zona, Canton, Provincia, partido, JRV
 from comparacion import forms
 
@@ -271,8 +268,6 @@ def Validacion_presidente(request, pk_test):
 @login_required(login_url="/login/")
 def JRVView(request, pk):
     if request.method == "POST":
-        # Guardado
-        print (request.POST)
         pk = request.POST.get('jrvactual')
         q= JRV.objects.get(cod=pk)
         q.observaciones=request.POST.get('Observaciones')
@@ -287,39 +282,45 @@ def JRVView(request, pk):
         if request.POST.get('otroreclamo') != '':
             q.otro1 = request.POST.get('otroreclamo')
         q.save()
-        response = redirect('/comparacion/validacion_presidente/'+str(q.provincia_id))
-        return response
+        return redirect('/comparacion/validacion_presidente/' + str(q.provincia_id))
 
-    print("version ultima actualizada")
-    votacion_list = votacion.objects.raw("select * from comparacion_votacion where dignidad_id=1 and jrv_id='"+pk+"' order by comparacion_votacion.partido_id")
     jrvactual = JRV.objects.get(cod=pk)
     if jrvactual.para_reclamar == True:
-        print("para reclamar")
         reclamar="si"
     else:
         if jrvactual.no_procede == True:
-            print("No procede reclamo")
             reclamar="no"
         else:
             reclamar="null"
 
     provstr=str(jrvactual.provincia.nomprovincia).rstrip("\n")
     cantonstr = str(jrvactual.canton.nomcanton).rstrip("\n")
-    if jrvactual.circunscripcion is None: circunstr = "0"
-    else: circunstr = str(jrvactual.circunscripcion.codcircunscripcion)
-    if jrvactual.zona is None: zonastr = "0"
-    else: zonastr = str(jrvactual.zona.codzona)
+    if jrvactual.circunscripcion is None:
+        circunstr = "0"
+    else:
+        circunstr = str(jrvactual.circunscripcion.codcircunscripcion)
+
+    if jrvactual.zona is None:
+        zonastr = "0"
+    else:
+        zonastr = str(jrvactual.zona.codzona)
+
     imagencne = requote_uri("https://impugnaciones.andresarauz.ec/images/1-PRESIDENTA-E%20Y%20VICEPRESIDENTA-E/" + str(jrvactual.provincia_id) +"-"+provstr+"/"+str(jrvactual.canton_id) +"-"+cantonstr + \
                 "/" + str(jrvactual.provincia_id) + "_" +str(jrvactual.canton_id)+"_"+ circunstr +"_"+str(jrvactual.parroquia_id)+"_"+zonastr+"_"+str(jrvactual.numero)+str(jrvactual.genero)+"_"+str(jrvactual.noactapre)+"_I1.pdf")
-    print(imagencne )
 
-    class imagen:
+    class Imagen:
         uno= jrvactual.acta_delegados
-        dos = jrvactual.acta_delegados2
-        tres = jrvactual.acta_delegados3
 
-    context = {"votacion_list": votacion_list, 'jrvactual': jrvactual,  'reclamar': reclamar, 'imagen' :imagen, 'imagencne':imagencne}
-    return render(request, 'validacion/validar_jrv.html', context  )
+    return render(
+        request,
+        'validacion/validar_jrv.html',
+        {
+            'jrvactual': jrvactual,
+            'reclamar': reclamar,
+            'imagen': Imagen,
+            'imagencne': imagencne
+        }
+    )
 
 
 @login_required(login_url="/login/")

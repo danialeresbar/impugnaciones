@@ -61,72 +61,72 @@
 
                     <hr>
 
-<script>
-     function zoomin2(){
-        var myImg = document.getElementById("map2");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 2500) return false;
-         else{
-            myImg.style.width = (currWidth + 100) + "px";
-        }
-    }
-    function zoomout2(){
-        var myImg = document.getElementById("map2");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 100) return false;
-		 else{
-            myImg.style.width = (currWidth - 100) + "px";
-        }
-    }
+                    <script>
+                        function zoomin2(){
+                            var myImg = document.getElementById("map2");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 2500) return false;
+                            else{
+                                myImg.style.width = (currWidth + 100) + "px";
+                            }
+                        }
+                        function zoomout2(){
+                            var myImg = document.getElementById("map2");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 100) return false;
+                            else{
+                                myImg.style.width = (currWidth - 100) + "px";
+                            }
+                        }
 
-    function zoomin(){
-        var myImg = document.getElementById("map");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 2500) return false;
-         else{
-            myImg.style.width = (currWidth + 100) + "px";
-        }
-    }
-    function zoomout(){
-        var myImg = document.getElementById("map");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 100) return false;
-		 else{
-            myImg.style.width = (currWidth - 100) + "px";
-        }
-    }
-     function zoomin1(){
-        var myImg = document.getElementById("map1");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 2500) return false;
-         else{
-            myImg.style.width = (currWidth + 100) + "px";
-        }
-    }
-    function zoomout1(){
-        var myImg = document.getElementById("map1");
-        var currWidth = myImg.clientWidth;
-        if(currWidth == 100) return false;
-		 else{
-            myImg.style.width = (currWidth - 100) + "px";
-        }
-    }
+                        function zoomin(){
+                            var myImg = document.getElementById("map");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 2500) return false;
+                            else{
+                                myImg.style.width = (currWidth + 100) + "px";
+                            }
+                        }
+                        function zoomout(){
+                            var myImg = document.getElementById("map");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 100) return false;
+                            else{
+                                myImg.style.width = (currWidth - 100) + "px";
+                            }
+                        }
+                        function zoomin1(){
+                            var myImg = document.getElementById("map1");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 2500) return false;
+                            else{
+                                myImg.style.width = (currWidth + 100) + "px";
+                            }
+                        }
+                        function zoomout1(){
+                            var myImg = document.getElementById("map1");
+                            var currWidth = myImg.clientWidth;
+                            if(currWidth == 100) return false;
+                            else{
+                                myImg.style.width = (currWidth - 100) + "px";
+                            }
+                        }
 
-</script>
+                    </script>
 
 
-<style>
-    *body {
-  margin: 0;
-}
-#navbar {
-	background-color: #000;
-    padding-top: 3px;
-	padding-bottom: 3px;
-	padding-left: 20px;
-}
+                    <style>
+                        *body {
+                            margin: 0;
+                        }
+                        #navbar {
+                            background-color: #000;
+                            padding-top: 3px;
+                            padding-bottom: 3px;
+                            padding-left: 20px;
+                        }
 
-</style>
+                    </style>
 
 
                     <div class="row" style="background-color: #d8f0f9">
@@ -172,30 +172,29 @@
             </body>
             </html>
 
-            <table id="votacion-table" class="table table-striped">
+            <table id="jrvactual-table" class="table table-striped">
                 <thead>
                 <tr>
                     <th class="text-center" scope="col">Lista/Candidato</th>
                     <th class="text-center" scope="col">Delegados</th>
-                    <th class="text-center" scope="col">Digitacion</th>
-                    <th class="text-center" scope="col">Conteo Rapido CNE</th>
                     <th class="text-center" scope="col">Escrutinio CNE</th>
-                    <th class="text-center" scope="col">Digitalizacion CNE</th>
+                    <th class="text-center" scope="col">Primera Vuelta</th>
 
                 </tr>
                 </thead>
                 <tbody>
-
-                {% for votacion in votacion_list %}
-                    <tr>
-                        <th class="text-center" scope="row">{{ votacion.partido }}</th>
-                        <td class="text-center">{{ votacion.delegados }}</td>
-                        <td class="text-center">{{ votacion.app_digitacion }}</td>
-                        <td class="text-center">{{ votacion.conteo_rapido_cne }}</td>
-                        <td class="text-center">{{ votacion.cne1 }}</td>
-                        <td class="text-center">{{ votacion.digitalizacion_cne }}</td>
-                    </tr>
-                {% endfor %}
+                <tr>
+                    <th class="text-center" scope="row">Andrés Arauz</th>
+                    <td class="text-center">{{ jrvactual.app_arauz }}</td>
+                    <td class="text-center">{{ jrvactual.cne_arauz }}</td>
+                    <td class="text-center">{{ jrvactual.old_cne_arauz }}</td>
+                </tr>
+                <tr>
+                    <th class="text-center" scope="row">Guillermo Lasso</th>
+                    <td class="text-center">{{ jrvactual.app_lasso }}</td>
+                    <td class="text-center">{{ jrvactual.cne_lasso }}</td>
+                    <td class="text-center">{{ jrvactual.old_cne_lasso }}</td>
+                </tr>
                 </tbody>
 
             </table>
@@ -237,8 +236,8 @@
 
                                             <center><label>
                                                 <input type="radio" class="checkbox form-control" name="reclamar" value="No_procede" {% if reclamar == "no" %}checked="True"{% endif %} />No procede Reclamo</label></center>
-                                         <center><label>
-                                        <input type="text" class=" form-control" name="otroreclamo" />Otro Tipo de Reclamo </label></center>
+                                            <center><label>
+                                                <input type="text" class=" form-control" name="otroreclamo" />Otro Tipo de Reclamo </label></center>
 
                                         </div>
                                     </div>
