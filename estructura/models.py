@@ -139,17 +139,6 @@ class Recinto(models.Model):
         return reverse("estructura_Recinto_update", args=(self.pk,))
 
 
-class Alert(models.Model):
-    name = models.CharField(max_length=64, blank=True)
-
-    class Meta:
-        verbose_name = 'Alerta'
-        verbose_name_plural = 'Alertas'
-
-    def __str__(self):
-        return self.name
-
-
 class JRV(models.Model):
     # Relationships
     provincia = models.ForeignKey("estructura.Provincia", on_delete=models.CASCADE)
@@ -158,7 +147,16 @@ class JRV(models.Model):
     parroquia = models.ForeignKey("estructura.Parroquia", on_delete=models.CASCADE)
     zona = models.ForeignKey("estructura.Zona", on_delete=models.CASCADE, null=True)
     recinto = models.ForeignKey("estructura.Recinto", on_delete=models.CASCADE)
-    alerts = models.ManyToManyField(Alert)
+
+    # Fields
+    unes_cne_alert = models.BooleanField(default=False)
+    suffragettes_votes_alert = models.BooleanField(default=False)
+    max_total_votes_alert = models.BooleanField(default=False)
+    suffragettes_alert = models.BooleanField(default=False)
+    suffragettes_first_alert = models.BooleanField(default=False)
+    null_votes_alert = models.BooleanField(default=False)
+    blank_votes_alert = models.BooleanField(default=False)
+    arauz_votes_alert = models.BooleanField(default=False)
 
     # Fields
     cod = models.CharField(max_length=30, primary_key=True)

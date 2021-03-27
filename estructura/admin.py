@@ -123,7 +123,6 @@ class JRVAdmin(admin.ModelAdmin):
     form = JRVAdminForm
     list_display = ('cod',)
     readonly_fields = ('acta_cne',)
-    filter_horizontal = ('alerts',)
     search_fields = ('cod',)
 
 
@@ -164,6 +163,5 @@ admin.site.register(models.Zona, ZonaAdmin)
 admin.site.register(models.Parroquia, ParroquiaAdmin)
 admin.site.register(models.Recinto, RecintoAdmin)
 admin.site.register(models.JRV, JRVAdmin)
-admin.site.register(models.Alert, AlertAdmin)
 admin.site.register(models.partido, PartidoAdmin)
 admin.site.register(models.dignidad, DignidadAdmin)
